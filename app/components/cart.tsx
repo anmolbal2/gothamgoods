@@ -311,9 +311,14 @@ export function CartDrawer() {
             </span>
             <span className="font-display text-2xl">{money(subtotalCents)}</span>
           </div>
-          <p className="mb-3 font-mono text-[11px] uppercase tracking-widest text-ink/40">
-            + $5 flat shipping · ships from NJ in 2–3 days
-          </p>
+          <div className="mb-3 flex items-center justify-between">
+            <span className="font-mono text-xs uppercase tracking-widest text-ink/60">
+              Shipping
+            </span>
+            <span className="font-mono text-sm font-bold uppercase tracking-widest text-orange">
+              Free
+            </span>
+          </div>
           {error && (
             <p className="mb-3 font-mono text-xs text-red-600" role="alert">
               {error}

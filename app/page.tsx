@@ -65,6 +65,9 @@ export default function Home() {
                   {hero.tagline}
                 </span>
               )}
+              <span className="ml-2 inline-block border border-white/30 px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-white">
+                Free Shipping
+              </span>
               <h2
                 data-testid="product-name"
                 className="mt-3 font-display text-3xl uppercase tracking-tight"
@@ -85,6 +88,9 @@ export default function Home() {
                 priceCents={hero.priceCents}
                 variant="hero"
               />
+              <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-white/60">
+                🚚 Free shipping · ships from NJ in 2–3 days
+              </p>
             </div>
           </div>
         </div>
@@ -131,6 +137,9 @@ export default function Home() {
                     {money(p.priceCents)}
                   </span>
                 </div>
+                <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-orange">
+                  Free shipping
+                </p>
                 {p.blurb && (
                   <p className="mt-2 line-clamp-3 text-sm text-ink/70">{p.blurb}</p>
                 )}

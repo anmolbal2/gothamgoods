@@ -71,8 +71,8 @@ export default function RootLayout({
             <div className="mx-auto max-w-6xl px-5 py-12">
               <p className="font-display text-2xl uppercase tracking-tight">Gotham Goods</p>
               <p className="mt-2 max-w-md text-sm text-cream/60">
-                Officially unofficial New York fan merch. Shipped from New Jersey
-                in 2–3 days.
+                Officially unofficial New York fan merch. Free shipping, straight
+                from New Jersey in 2–3 days.
               </p>
               <p className="mt-6 font-mono text-[11px] uppercase tracking-widest text-cream/40">
                 © {year} Gotham Goods · Fan-made. Not affiliated with the NBA, any team,

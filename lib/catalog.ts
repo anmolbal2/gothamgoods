@@ -9,7 +9,7 @@
  * product by running:  node --env-file=.env.local scripts/fetch-catalog.mjs
  */
 
-export type Size = "S" | "M" | "L" | "XL" | "XXL";
+export type Size = "S" | "M" | "L" | "XL" | "XXL" | "3XL" | "4XL";
 
 /** Front-of-shirt print, rendered as a CSS mockup until a real Printify image exists. */
 export interface TeeDesign {
@@ -45,7 +45,7 @@ export const CATALOG: Record<string, Product> = {
   // pulled via scripts/fetch-catalog.mjs. Add more products by appending objects.
   "knicks-in-four": {
     name: "Knicks in Four Tee",
-    priceCents: 3400, // $34.00 — adjust to your retail price
+    priceCents: 3999, // $39.99 — flat price across all sizes; free shipping
     // Real Printify front mockup. If blank, the CSS tee mockup (design) renders instead.
     image:
       "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/unisex-garment-dyed-t-shirt.jpg?camera_label=front",
@@ -58,11 +58,19 @@ export const CATALOG: Record<string, Product> = {
       shirtColor: "white",
     },
     printifyProductId: "6a27897a8f2246d09f0acb65",
-    variants: { S: 73199, M: 73203, L: 73207, XL: 73211, XXL: 73215 },
+    variants: {
+      S: 73199,
+      M: 73203,
+      L: 73207,
+      XL: 73211,
+      XXL: 73215,
+      "3XL": 79169,
+      "4XL": 101476,
+    },
   },
 };
 
-export const SIZE_ORDER: Size[] = ["S", "M", "L", "XL", "XXL"];
+export const SIZE_ORDER: Size[] = ["S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 
 export interface ResolvedLine {
   name: string;

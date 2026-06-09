@@ -65,8 +65,8 @@ export async function POST(request: Request) {
         {
           shipping_rate_data: {
             type: "fixed_amount",
-            fixed_amount: { amount: 500, currency: "usd" },
-            display_name: "Standard 2-3 days, ships from NJ",
+            fixed_amount: { amount: 0, currency: "usd" },
+            display_name: "Free Shipping — ships from NJ in 2-3 days",
           },
         },
       ],

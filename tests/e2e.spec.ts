@@ -11,7 +11,7 @@ test.skip(
  * Proves the buyer flow + server-side pricing end to end against REAL Stripe
  * (test mode): the storefront renders from the catalog, "Buy now" creates a real
  * Checkout Session, and Stripe's hosted page shows the correct product and total
- * computed server-side ($34.00 item + $5.00 shipping = $39.00).
+ * computed server-side ($39.99 item + free shipping = $39.99).
  *
  * Completing the card form and landing on /thank-you is intentionally left to the
  * manual `stripe listen` smoke test (Part 3 of the brief): automating Stripe's
@@ -41,6 +41,6 @@ test("Buy redirects to Stripe Checkout with the correct server-priced order", as
   await expect(page.getByText(productName, { exact: false }).first()).toBeVisible({
     timeout: 20_000,
   });
-  // $34.00 item + $5.00 shipping = $39.00 total — all computed server-side.
-  await expect(page.getByText("$39.00").first()).toBeVisible({ timeout: 20_000 });
+  // $39.99 item + free shipping = $39.99 total — all computed server-side.
+  await expect(page.getByText("$39.99").first()).toBeVisible({ timeout: 20_000 });
 });

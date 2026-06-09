@@ -34,8 +34,8 @@ export const SERIES = {
   tickerItems: [
     "NEW YORK LEADS 2–0",
     "GAME 3 — TONIGHT 8:00 ET",
+    "FREE SHIPPING ON EVERY ORDER",
     "THE FINALS DROP",
-    "SHIPPED FROM NEW JERSEY",
-    "2–3 DAY DELIVERY",
+    "SHIPPED FROM NEW JERSEY · 2–3 DAYS",
   ],
 };
