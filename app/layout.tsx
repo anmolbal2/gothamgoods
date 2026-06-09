@@ -2,8 +2,12 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
 import "./globals.css";
-import { SERIES } from "@/lib/series";
+import { buildTickerItems } from "@/lib/series";
+import { getSeriesState } from "@/lib/series-store";
 import { CartProvider, CartButton, CartDrawer } from "@/app/components/cart";
+
+// Re-render with fresh series data from Supabase (the cron writes it); ISR window.
+export const revalidate = 120;
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -15,10 +19,10 @@ export const metadata: Metadata = {
     "Knicks finals-run fan tees. Heavyweight cotton, shipped from New Jersey in 2–3 days. Fan-made — not affiliated with the NBA or any team.",
 };
 
-function Ticker() {
+function Ticker({ items }: { items: string[] }) {
   const Row = () => (
     <div className="flex shrink-0 items-center">
-      {SERIES.tickerItems.map((t, i) => (
+      {items.map((t, i) => (
         <span key={i} className="flex items-center">
           <span className="px-6 py-2 font-mono text-xs uppercase tracking-[0.22em]">
             {t}
@@ -38,10 +42,12 @@ function Ticker() {
   );
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   const year = new Date().getFullYear();
+  const series = await getSeriesState();
+  const tickerItems = buildTickerItems(series);
   return (
     <html
       lang="en"
@@ -49,7 +55,7 @@ export default function RootLayout({
     >
       <body className="flex min-h-full flex-col bg-cream">
         <CartProvider>
-          <Ticker />
+          <Ticker items={tickerItems} />
 
           <header className="sticky top-0 z-30 border-b-2 border-ink bg-cream/95 backdrop-blur">
             <div className="mx-auto flex max-w-6xl items-center justify-between px-5 py-4">

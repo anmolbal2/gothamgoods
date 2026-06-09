@@ -1,0 +1,21 @@
+name: Refresh live series data
+
+# Primary trigger for the live-data cron. Runs every 2 hours (Vercel Hobby cron
+# is capped at once/day, so GitHub Actions drives the frequent refresh). The
+# endpoint is idempotent and secured by CRON_SECRET.
+on:
+  schedule:
+    - cron: "0 */2 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit refresh-series endpoint
+        run: |
+          code=$(curl -sS -o /tmp/out.json -w "%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://gothamgoods.vercel.app/api/cron/refresh-series")
+          echo "HTTP $code"; cat /tmp/out.json; echo
+          test "$code" = "200"

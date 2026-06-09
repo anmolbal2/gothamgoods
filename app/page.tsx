@@ -1,16 +1,21 @@
 import { listProducts, type Size } from "@/lib/catalog";
-import { SERIES } from "@/lib/series";
+import { heroEyebrow } from "@/lib/series";
+import { getSeriesState } from "@/lib/series-store";
 import TeeMockup from "@/app/components/TeeMockup";
 import FinalsTracker from "@/app/components/FinalsTracker";
 import { AddToCart } from "@/app/components/cart";
+
+// Re-render with fresh series data from Supabase (the cron writes it); ISR window.
+export const revalidate = 120;
 
 function money(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
 
-export default function Home() {
+export default async function Home() {
   const products = listProducts();
   const hero = products[0];
+  const series = await getSeriesState();
 
   return (
     <>
@@ -18,8 +23,7 @@ export default function Home() {
       <section className="bg-blue text-white">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
           <p className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-orange">
-            Back page · The Finals Drop · {SERIES.teamName} up {SERIES.wins}–
-            {SERIES.losses}
+            {heroEyebrow(series)}
           </p>
 
           <div className="grid items-center gap-10 lg:grid-cols-2">
@@ -97,7 +101,7 @@ export default function Home() {
       </section>
 
       {/* LIVE FINALS TRACKER */}
-      <FinalsTracker />
+      <FinalsTracker state={series} />
 
       {/* THE DROP */}
       <section className="mx-auto max-w-6xl px-5 py-16">
