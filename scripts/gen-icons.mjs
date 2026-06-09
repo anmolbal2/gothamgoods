@@ -21,9 +21,11 @@ async function renderPng(size) {
     `<!doctype html><html><head><style>html,body{margin:0;padding:0}svg{display:block}</style></head><body>${sized}</body></html>`,
     { waitUntil: "networkidle" },
   );
+  // omitBackground => PNG keeps an alpha channel (RGBA). Next's .ico decoder
+  // requires RGBA; our orange fill stays fully opaque regardless.
   const buf = await page.screenshot({
     clip: { x: 0, y: 0, width: size, height: size },
-    omitBackground: false,
+    omitBackground: true,
   });
   await browser.close();
   return buf;

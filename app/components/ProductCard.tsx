@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { SIZE_ORDER, type Product, type Size } from "@/lib/catalog";
 import { useCart } from "@/app/components/cart";
+import ProductGallery from "@/app/components/ProductGallery";
 
 function money(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
@@ -36,18 +37,13 @@ export default function ProductCard({
       className="flex flex-col border-2 border-ink bg-paper"
     >
       <div className="relative bg-white p-4">
-        {color.image ? (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img
-            src={color.image}
-            alt={`${product.name} — ${color.name}`}
-            className="mx-auto aspect-square w-full max-w-[300px] object-contain"
-          />
-        ) : (
-          <div className="aspect-square w-full" />
-        )}
+        <ProductGallery
+          key={color.name}
+          images={color.images}
+          alt={`${product.name} — ${color.name}`}
+        />
         {product.tagline && (
-          <span className="absolute left-4 top-4 bg-orange px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
+          <span className="pointer-events-none absolute left-4 top-4 z-20 bg-orange px-2 py-1 font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
             {product.tagline}
           </span>
         )}

@@ -1,0 +1,44 @@
+name: Sync new products (AI copy)
+
+# Discovers newly-published Printify products and uses the Claude API to write each
+# one's marketing copy into data/auto-products.json, then commits the change.
+#
+# Manual-only for now (workflow_dispatch). Enable the schedule below AFTER
+# scripts/gen-catalog.mjs is wired to merge data/auto-products.json into the
+# catalog — otherwise discovered products land in the JSON but not the storefront.
+on:
+  workflow_dispatch: {}
+  # schedule:
+  #   - cron: "0 */6 * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Discover new products + generate AI copy
+        env:
+          PRINTIFY_API_TOKEN: ${{ secrets.PRINTIFY_API_TOKEN }}
+          PRINTIFY_SHOP_ID: ${{ secrets.PRINTIFY_SHOP_ID }}
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          # Optional: ANTHROPIC_MODEL (default claude-opus-4-6; set claude-haiku-4-5 for cheaper bulk copy)
+          ANTHROPIC_MODEL: ${{ secrets.ANTHROPIC_MODEL }}
+        run: node scripts/sync-products.mjs
+
+      - name: Commit if changed
+        run: |
+          if [[ -n "$(git status --porcelain data/auto-products.json)" ]]; then
+            git config user.name "gotham-bot"
+            git config user.email "bot@users.noreply.github.com"
+            git add data/auto-products.json
+            git commit -m "Auto: discover new products + AI marketing copy"
+            git push
+          else
+            echo "No new products — nothing to commit."
+          fi

@@ -65,6 +65,26 @@ async function getProduct(id) {
   return r.json();
 }
 
+// Curated, ordered set of mockup views per color (Printify camera_labels):
+// design front -> male on-person -> female on-person -> lifestyle context -> back.
+const PREFERRED = [
+  "front",
+  "person-1-front",
+  "person-3-front",
+  "person-4-context",
+  "person-5-context",
+  "back",
+];
+const EXCLUDE = new Set(["size-chart"]);
+
+function cameraLabel(src) {
+  try {
+    return new URL(src).searchParams.get("camera_label") || "";
+  } catch {
+    return "";
+  }
+}
+
 function buildColors(p) {
   const enabled = (p.variants || []).filter((v) => v.is_enabled);
   const byColor = {};
@@ -78,14 +98,31 @@ function buildColors(p) {
     const variants = byColor[color];
     if (!variants) continue;
     const ids = new Set(Object.values(variants));
-    const img =
-      (p.images || []).find(
-        (im) => im.position === "front" && (im.variant_ids || []).some((id) => ids.has(id)),
-      ) || (p.images || []).find((im) => (im.variant_ids || []).some((id) => ids.has(id)));
+
+    // First src per camera_label for images that belong to this color (skip junk).
+    const byLabel = {};
+    for (const im of p.images || []) {
+      if (!(im.variant_ids || []).some((id) => ids.has(id))) continue;
+      const label = cameraLabel(im.src);
+      if (EXCLUDE.has(label)) continue;
+      if (!(label in byLabel)) byLabel[label] = im.src;
+    }
+
+    // Preferred views (in order); fall back to any remaining if we got fewer than 2.
+    let images = PREFERRED.filter((l) => byLabel[l]).map((l) => byLabel[l]);
+    if (images.length < 2) {
+      const rest = Object.entries(byLabel)
+        .filter(([l]) => !PREFERRED.includes(l))
+        .map(([, src]) => src);
+      images = [...images, ...rest];
+    }
+    images = [...new Set(images)].slice(0, 6);
+
     colors.push({
       name: color,
       swatch: SWATCH[color] || "#888888",
-      image: img ? img.src : "",
+      images,
+      image: images[0] || "",
       variants,
     });
   }
@@ -123,7 +160,8 @@ export const SIZE_ORDER: Size[] = ${JSON.stringify(SIZE_ORDER)};
 export interface ColorVariant {
   name: string;
   swatch: string; // hex for the picker
-  image: string; // front mockup for this color
+  images: string[]; // ordered mockups: front, on-person, lifestyle, back
+  image?: string; // legacy first image (hero/feed compat) = images[0]
   variants: Partial<Record<Size, number>>; // size -> Printify variant id
 }
 

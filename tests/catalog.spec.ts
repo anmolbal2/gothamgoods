@@ -15,8 +15,8 @@ test("a single CATALOG object with colors drives list + purchase path", () => {
     tagline: "TEST",
     printifyProductId: "PID_X",
     colors: [
-      { name: "Black", swatch: "#000", image: "", variants: { M: 999, L: 1000 } },
-      { name: "White", swatch: "#fff", image: "", variants: { M: 888 } },
+      { name: "Black", swatch: "#000", images: ["a.jpg", "b.jpg"], variants: { M: 999, L: 1000 } },
+      { name: "White", swatch: "#fff", images: ["c.jpg"], variants: { M: 888 } },
     ],
   };
 
@@ -43,6 +43,7 @@ test("real catalog: 3 products, each with colors + resolvable variants", () => {
   for (const p of ps) {
     expect(p.colors.length).toBeGreaterThan(0);
     const c = p.colors[0];
+    expect(c.images.length).toBeGreaterThan(0); // carousel needs >=1 photo
     const sizes = Object.keys(c.variants) as Size[];
     expect(sizes.length).toBeGreaterThan(0);
     const line = resolveLine(p.id, c.name, sizes[0]);

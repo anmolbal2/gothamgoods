@@ -78,19 +78,29 @@ pixel is cold; switch to Purchase once ~20–30 purchases have accumulated.
 
 ---
 
-## New product drops
+## New product drops (zero-touch + AI copy)
 
-The feed at `/api/feed/meta` auto-reflects whatever is in `lib/catalog.ts`, and
-Larven re-scrapes the store URL — so once a new product is in the deployed catalog,
-ads pick it up with no further touch. Today new products enter the catalog by editing
-the curated `PRODUCTS` list in `scripts/gen-catalog.mjs` and re-running it:
+The feed at `/api/feed/meta` auto-reflects whatever is in `lib/catalog.ts`, and Larven
+re-scrapes the store URL — so once a new product is in the deployed catalog, ads pick
+it up with no further touch.
+
+`scripts/sync-products.mjs` makes the *discovery* zero-touch: it fetches every
+published Printify product, finds the ones not already in the catalog, and uses the
+**Claude API** to write each new product's `name` / `tagline` / `blurb` in the brand
+voice, appending them to `data/auto-products.json`.
 
 ```
-node --env-file=.env.local scripts/gen-catalog.mjs
+node --env-file=.env.local scripts/sync-products.mjs --dry-run   # list new products only
+node --env-file=.env.local scripts/sync-products.mjs             # generate copy + write JSON
 ```
 
-(Fully zero-touch discovery of brand-new Printify products — using Printify titles as
-fallback metadata, on a cron — is a possible follow-up; see the plan.)
+Run on a schedule by `.github/workflows/sync-products.yml` (manual-only until the
+integration step below; needs `ANTHROPIC_API_KEY` + `PRINTIFY_*` GitHub secrets).
+
+> **Integration step (pending):** `data/auto-products.json` is written but not yet
+> consumed. `scripts/gen-catalog.mjs` (being edited separately) must merge it into its
+> curated `PRODUCTS` list — curated entries win on id conflict — so auto-discovered
+> products reach the storefront + feed. Then enable the schedule in the workflow.
 
 ---
 
