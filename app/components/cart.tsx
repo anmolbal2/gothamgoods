@@ -9,6 +9,7 @@ import {
 } from "react";
 import { CATALOG } from "@/lib/catalog";
 import type { Size } from "@/lib/catalog";
+import { genEventId, track, getFbp, getFbc } from "@/lib/meta-pixel";
 
 export interface CartItem {
   productId: string;
@@ -79,6 +80,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
     setError(null);
     setOpen(true);
+    // Meta Pixel: AddToCart (one event per user-initiated add).
+    const priceCents = CATALOG[productId]?.priceCents ?? 0;
+    track(
+      "AddToCart",
+      {
+        content_ids: [productId],
+        content_type: "product",
+        value: priceCents / 100,
+        currency: "USD",
+      },
+      genEventId(),
+    );
   }, []);
 
   const setQty = useCallback(
@@ -112,11 +125,26 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (items.length === 0) return;
     setCheckingOut(true);
     setError(null);
+    // Meta Pixel: InitiateCheckout. The eventId + fbp/fbc go to the server too so the
+    // server-side CAPI InitiateCheckout dedups against this browser event.
+    const eventId = genEventId();
+    const contentIds = [...new Set(items.map((it) => it.productId))];
+    track(
+      "InitiateCheckout",
+      {
+        content_ids: contentIds,
+        content_type: "product",
+        value: subtotalCents / 100,
+        currency: "USD",
+        num_items: count,
+      },
+      eventId,
+    );
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cart: items }),
+        body: JSON.stringify({ cart: items, eventId, fbp: getFbp(), fbc: getFbc() }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));
@@ -129,7 +157,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       setError(e instanceof Error ? e.message : "Something went wrong");
       setCheckingOut(false);
     }
-  }, [items]);
+  }, [items, subtotalCents, count]);
 
   return (
     <CartContext.Provider

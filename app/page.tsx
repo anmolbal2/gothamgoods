@@ -3,6 +3,7 @@ import { heroEyebrow } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
 import FinalsTracker from "@/app/components/FinalsTracker";
 import ProductCard from "@/app/components/ProductCard";
+import { ViewContent } from "@/app/components/PixelEvents";
 
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
@@ -17,10 +18,15 @@ const HERO_LINES = [
 export default async function Home() {
   const products = listProducts();
   const series = await getSeriesState();
-  const heroImage = products[0]?.colors[0]?.image;
+  const hero = products[0];
+  const heroImage = hero?.colors[0]?.image;
 
   return (
     <>
+      {hero ? (
+        <ViewContent productId={hero.id} valueCents={hero.priceCents} />
+      ) : null}
+
       {/* HERO */}
       <section className="bg-blue text-white">
         <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">

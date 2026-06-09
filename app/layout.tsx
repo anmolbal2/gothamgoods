@@ -1,13 +1,18 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
 import "./globals.css";
 import { buildTickerItems } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
 import { CartProvider, CartButton, CartDrawer } from "@/app/components/cart";
+import { PixelPageView } from "@/app/components/PixelEvents";
 
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
+
+const META_PIXEL_ID = process.env.NEXT_PUBLIC_META_PIXEL_ID;
+const META_DOMAIN_VERIFICATION = process.env.META_DOMAIN_VERIFICATION;
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({ variable: "--font-geist-mono", subsets: ["latin"] });
@@ -17,6 +22,10 @@ export const metadata: Metadata = {
   title: "Gotham Goods — Knicks Finals Fan Tees, Shipped from NJ",
   description:
     "Knicks finals-run fan tees. Heavyweight cotton, shipped from New Jersey in 2–3 days. Fan-made — not affiliated with the NBA or any team.",
+  // Meta Business domain verification — renders <meta name="facebook-domain-verification">.
+  ...(META_DOMAIN_VERIFICATION
+    ? { verification: { other: { "facebook-domain-verification": META_DOMAIN_VERIFICATION } } }
+    : {}),
 };
 
 function Ticker({ items }: { items: string[] }) {
@@ -54,7 +63,18 @@ export default async function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream">
+        {META_PIXEL_ID ? (
+          <Script id="meta-pixel" strategy="afterInteractive">
+            {`!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
+          </Script>
+        ) : null}
         <CartProvider>
+          <PixelPageView />
           <Ticker items={tickerItems} />
 
           <header className="sticky top-0 z-30 border-b-2 border-ink bg-cream/95 backdrop-blur">

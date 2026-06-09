@@ -2,6 +2,7 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { resolveLine, type Size } from "@/lib/catalog";
 import type { PrintifyItem } from "@/lib/printify";
+import { sendEvents } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
 
@@ -13,12 +14,21 @@ interface CartLine {
 }
 
 /**
- * POST { cart: [{ productId, size, qty }] }
+ * POST { cart: [{ productId, colorName, size, qty }], eventId?, fbp?, fbc? }
  * Prices everything server-side from the catalog — the browser's prices are ignored.
  * Returns { url } of the Stripe Checkout session to redirect to.
+ *
+ * The Meta fields (eventId/fbp/fbc) are stashed into session metadata so the Stripe
+ * webhook can fire the authoritative server-side Purchase, and a server-side
+ * InitiateCheckout fires here (deduped against the browser one via eventId).
  */
 export async function POST(request: Request) {
-  let body: { cart?: CartLine[] };
+  let body: {
+    cart?: CartLine[];
+    eventId?: string;
+    fbp?: string;
+    fbc?: string;
+  };
   try {
     body = await request.json();
   } catch {
@@ -32,6 +42,9 @@ export async function POST(request: Request) {
 
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   const printify_items: PrintifyItem[] = [];
+  const contentIds = new Set<string>();
+  let totalCents = 0;
+  let totalQty = 0;
 
   try {
     for (const { productId, colorName, size, qty } of cart) {
@@ -46,6 +59,9 @@ export async function POST(request: Request) {
         quantity,
       });
       printify_items.push({ ...item, quantity });
+      contentIds.add(productId);
+      totalCents += priceCents * quantity;
+      totalQty += quantity;
     }
   } catch (err) {
     return Response.json(
@@ -55,6 +71,10 @@ export async function POST(request: Request) {
   }
 
   const siteUrl = process.env.SITE_URL || "http://localhost:3000";
+  const ids = [...contentIds];
+  const eventId = typeof body.eventId === "string" ? body.eventId : undefined;
+  const fbp = typeof body.fbp === "string" ? body.fbp : "";
+  const fbc = typeof body.fbc === "string" ? body.fbc : "";
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -71,11 +91,49 @@ export async function POST(request: Request) {
           },
         },
       ],
-      // Stash the Printify line items so the webhook can place the order.
-      metadata: { printify_items: JSON.stringify(printify_items) },
+      // Stash the Printify line items so the webhook can place the order, plus the
+      // Meta identifiers so the webhook can fire the server-side Purchase.
+      metadata: {
+        printify_items: JSON.stringify(printify_items),
+        meta_fbp: fbp,
+        meta_fbc: fbc,
+        meta_content_ids: JSON.stringify(ids),
+        meta_num_items: String(totalQty),
+      },
       success_url: `${siteUrl}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/`,
     });
+
+    // Server-side InitiateCheckout (deduped against the browser event via eventId).
+    // Non-fatal: a CAPI hiccup must never block the redirect to Stripe.
+    if (eventId) {
+      try {
+        await sendEvents([
+          {
+            event_name: "InitiateCheckout",
+            event_id: eventId,
+            event_source_url: `${siteUrl}/`,
+            user_data: {
+              fbp: fbp || undefined,
+              fbc: fbc || undefined,
+              clientIp:
+                request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+                undefined,
+              userAgent: request.headers.get("user-agent") || undefined,
+            },
+            custom_data: {
+              currency: "USD",
+              value: totalCents / 100,
+              content_ids: ids,
+              content_type: "product",
+              num_items: totalQty,
+            },
+          },
+        ]);
+      } catch (err) {
+        console.error("checkout: CAPI InitiateCheckout failed (non-fatal)", err);
+      }
+    }
 
     return Response.json({ url: session.url });
   } catch (err) {

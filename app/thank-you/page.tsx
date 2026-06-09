@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { stripe } from "@/lib/stripe";
+import { PurchasePixel } from "@/app/components/PixelEvents";
 
 export const runtime = "nodejs";
 
@@ -18,6 +19,7 @@ export default async function ThankYouPage({
   let items: { name: string; quantity: number }[] = [];
   let totalCents: number | null = null;
   let email: string | undefined;
+  let contentIds: string[] = [];
   let loadError = false;
 
   if (session_id) {
@@ -31,6 +33,12 @@ export default async function ThankYouPage({
         name: li.description ?? "Item",
         quantity: li.quantity ?? 1,
       }));
+      try {
+        const parsed = JSON.parse(session.metadata?.meta_content_ids ?? "[]");
+        if (Array.isArray(parsed)) contentIds = parsed;
+      } catch {
+        /* ignore malformed metadata */
+      }
     } catch (e) {
       console.error("thank-you: failed to retrieve session", e);
       loadError = true;
@@ -58,6 +66,13 @@ export default async function ThankYouPage({
           </>
         ) : (
           <>
+            {session_id ? (
+              <PurchasePixel
+                eventId={session_id}
+                valueCents={totalCents ?? 0}
+                contentIds={contentIds}
+              />
+            ) : null}
             <span className="inline-block bg-orange px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink">
               Order confirmed
             </span>
