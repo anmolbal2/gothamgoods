@@ -20,24 +20,21 @@ const SERVER_ENV_KEYS = [
 ];
 const serverEnv: Record<string, string> = {};
 for (const k of SERVER_ENV_KEYS) serverEnv[k] = process.env[k] ?? "";
-// NOTE: STRIPE_SECRET_KEY is intentionally NOT overridden, so the live E2E
-// (Layer A) picks up the real test key from .env.local.
 
-/** Detect a real Stripe test key (for gating Layer A) without exposing the value. */
-function realStripeKeyAvailable(): boolean {
-  const fromEnv = process.env.STRIPE_SECRET_KEY;
-  const isReal = (v?: string) =>
-    !!v && v.startsWith("sk_") && !v.includes("placeholder") && v !== "sk_test_dummy";
-  if (isReal(fromEnv)) return true;
-  if (existsSync(".env.local")) {
-    const m = readFileSync(".env.local", "utf8").match(
-      /^\s*STRIPE_SECRET_KEY\s*=\s*(.+?)\s*$/m,
-    );
-    if (isReal(m?.[1]?.trim())) return true;
-  }
-  return false;
+// Read the Stripe TEST key straight from .env.local and force it onto the dev
+// server. This deliberately ignores any sk_/rk_ key leaked into the shell env
+// (e.g. a leftover live key) so tests can never hit a live Stripe account.
+function testStripeKeyFromEnvLocal(): string | undefined {
+  if (!existsSync(".env.local")) return undefined;
+  const m = readFileSync(".env.local", "utf8").match(
+    /^\s*STRIPE_SECRET_KEY\s*=\s*(.+?)\s*$/m,
+  );
+  const v = m?.[1]?.trim();
+  return v && v.startsWith("sk_test_") ? v : undefined;
 }
-process.env.E2E_STRIPE_READY = realStripeKeyAvailable() ? "1" : "";
+const testStripeKey = testStripeKeyFromEnvLocal();
+if (testStripeKey) serverEnv.STRIPE_SECRET_KEY = testStripeKey;
+process.env.E2E_STRIPE_READY = testStripeKey ? "1" : "";
 
 export default defineConfig({
   testDir: "./tests",
