@@ -138,7 +138,14 @@ export default function ProductGallery({
             <img
               src={images[idx]}
               alt={alt}
-              className="max-h-[85vh] w-auto rounded-lg bg-white object-contain"
+              onClick={(e) => {
+                if (!multi) return;
+                e.stopPropagation();
+                go(1);
+              }}
+              className={`max-h-[85vh] w-auto rounded-lg bg-white object-contain ${
+                multi ? "cursor-pointer" : ""
+              }`}
             />
             {multi && (
               <>

@@ -22,7 +22,7 @@ const PRODUCTS = [
     id: "6a27897a8f2246d09f0acb65",
     key: "knicks-in-four",
     name: "Knicks in Four Tee",
-    tagline: "THE FINALS DROP",
+    tagline: "MY MAYOR MUSLIM",
     blurb:
       "The whole city is saying it, so we put it on a shirt. Heavyweight Comfort Colors cotton, shipped from New Jersey.",
   },
@@ -38,7 +38,7 @@ const PRODUCTS = [
     id: "6a27c372cf9078f4a3052270",
     key: "corgi-wrong",
     name: "Corgi's Gonna Be Wrong Tee",
-    tagline: "FADE THE DOG",
+    tagline: "FADE THE CORGI",
     blurb:
       "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
   },
@@ -66,16 +66,22 @@ async function getProduct(id) {
 }
 
 // Curated, ordered set of mockup views per color (Printify camera_labels):
-// design front -> male on-person -> female on-person -> lifestyle context -> back.
+// design front -> male on-person -> female on-person -> lifestyle contexts.
+// No "back" view (the design is front-only, so backs add nothing).
 const PREFERRED = [
   "front",
   "person-1-front",
   "person-3-front",
   "person-4-context",
   "person-5-context",
-  "back",
 ];
-const EXCLUDE = new Set(["size-chart"]);
+const EXCLUDE = new Set([
+  "size-chart",
+  "back",
+  "person-1-back",
+  "person-3-back",
+  "person-4-back",
+]);
 
 function cameraLabel(src) {
   try {

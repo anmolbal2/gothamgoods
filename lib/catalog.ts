@@ -27,7 +27,7 @@ export const CATALOG: Record<string, Product> = {
   "knicks-in-four": {
     "name": "Knicks in Four Tee",
     "priceCents": 3999,
-    "tagline": "THE FINALS DROP",
+    "tagline": "MY MAYOR MUSLIM",
     "blurb": "The whole city is saying it, so we put it on a shirt. Heavyweight Comfort Colors cotton, shipped from New Jersey.",
     "printifyProductId": "6a27897a8f2246d09f0acb65",
     "colors": [
@@ -39,8 +39,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -61,8 +60,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73204/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -83,8 +81,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78963/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -105,8 +102,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -127,8 +123,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73982/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -149,8 +144,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/79033/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -180,8 +174,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -202,8 +195,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73204/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -224,8 +216,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78963/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -246,8 +237,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -268,8 +258,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/73982/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -290,8 +279,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/98446/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/126095/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/79033/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -309,7 +297,7 @@ export const CATALOG: Record<string, Product> = {
   "corgi-wrong": {
     "name": "Corgi's Gonna Be Wrong Tee",
     "priceCents": 3999,
-    "tagline": "FADE THE DOG",
+    "tagline": "FADE THE CORGI",
     "blurb": "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
     "printifyProductId": "6a27c372cf9078f4a3052270",
     "colors": [
@@ -321,8 +309,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73207/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -343,8 +330,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -365,8 +351,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78963/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -387,8 +372,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/78973/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -409,8 +393,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
@@ -431,8 +414,7 @@ export const CATALOG: Record<string, Product> = {
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/112433/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/100630/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
           "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/100637/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/98446/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=back"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context"
         ],
         "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/79033/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
