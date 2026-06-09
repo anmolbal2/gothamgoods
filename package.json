@@ -6,14 +6,25 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "test": "playwright test",
+    "test:webhook": "playwright test catalog webhook",
+    "test:e2e": "playwright test e2e",
+    "test:headed": "playwright test --headed"
+  },
+  "engines": {
+    "node": ">=20"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.108.0",
     "next": "16.2.7",
     "react": "19.2.4",
-    "react-dom": "19.2.4"
+    "react-dom": "19.2.4",
+    "resend": "^6.12.4",
+    "stripe": "^22.2.0"
   },
   "devDependencies": {
+    "@playwright/test": "^1.60.0",
     "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
