@@ -17,6 +17,9 @@ if (!TOKEN || !SHOP) {
 const PRICE_CENTS = 3999;
 
 // Curated product metadata, in display order.
+// Each product gets a LARGELY DIFFERENT set of Printify stock mockups (different
+// models/poses), so the lineup looks varied — not the same shots on 3 designs.
+// `views` = ordered camera_labels (front first; no backs). All exist per color.
 const PRODUCTS = [
   {
     id: "6a27897a8f2246d09f0acb65",
@@ -25,6 +28,7 @@ const PRODUCTS = [
     tagline: "MY MAYOR MUSLIM",
     blurb:
       "The whole city is saying it, so we put it on a shirt. Heavyweight Comfort Colors cotton, shipped from New Jersey.",
+    views: ["front", "person-1-front", "person-3-front", "person-3-context"],
   },
   {
     id: "6a27c36891cf9037720216b7",
@@ -33,6 +37,7 @@ const PRODUCTS = [
     tagline: "CAPTAIN CLUTCH",
     blurb:
       "Everyone's better than Jalen Brunson — until it's time to be better than Jalen Brunson. For the doubters and the believers.",
+    views: ["front", "person-2", "person-4-front", "person-4-context"],
   },
   {
     id: "6a27c372cf9078f4a3052270",
@@ -41,6 +46,7 @@ const PRODUCTS = [
     tagline: "FADE THE CORGI",
     blurb:
       "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
+    views: ["front", "person-5-context", "person-5-context-2", "folded"],
   },
 ];
 
@@ -65,10 +71,9 @@ async function getProduct(id) {
   return r.json();
 }
 
-// Curated, ordered set of mockup views per color (Printify camera_labels):
-// design front -> male on-person -> female on-person -> lifestyle contexts.
+// Default ordered views (used if a product doesn't define its own `views`).
 // No "back" view (the design is front-only, so backs add nothing).
-const PREFERRED = [
+const DEFAULT_VIEWS = [
   "front",
   "person-1-front",
   "person-3-front",
@@ -91,7 +96,7 @@ function cameraLabel(src) {
   }
 }
 
-function buildColors(p) {
+function buildColors(p, views = DEFAULT_VIEWS) {
   const enabled = (p.variants || []).filter((v) => v.is_enabled);
   const byColor = {};
   for (const v of enabled) {
@@ -114,8 +119,8 @@ function buildColors(p) {
       if (!(label in byLabel)) byLabel[label] = im.src;
     }
 
-    // Preferred views (in order); fall back to any remaining if we got fewer than 2.
-    let images = PREFERRED.filter((l) => byLabel[l]).map((l) => byLabel[l]);
+    // This product's views (in order); fall back to any remaining if fewer than 2.
+    let images = views.filter((l) => byLabel[l]).map((l) => byLabel[l]);
     if (images.length < 2) {
       const rest = Object.entries(byLabel)
         .filter(([l]) => !PREFERRED.includes(l))
@@ -144,7 +149,7 @@ for (const meta of PRODUCTS) {
     tagline: meta.tagline,
     blurb: meta.blurb,
     printifyProductId: meta.id,
-    colors: buildColors(p),
+    colors: buildColors(p, meta.views),
   };
   const totalVariants = catalog[meta.key].colors.reduce(
     (n, c) => n + Object.keys(c.variants).length,

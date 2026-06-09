@@ -19,13 +19,11 @@ function Arrow({
         e.stopPropagation();
         onClick();
       }}
-      className={`absolute top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 items-center justify-center rounded-full text-2xl leading-none ${
-        dir === "l" ? "left-2" : "right-2"
-      } ${
+      className={`absolute top-1/2 z-10 flex -translate-y-1/2 items-center justify-center rounded-full leading-none ${
         light
-          ? "bg-white/15 text-white hover:bg-white/30"
-          : "bg-ink/70 text-cream hover:bg-ink"
-      }`}
+          ? "h-12 w-12 bg-white/20 text-3xl text-white hover:bg-white/35"
+          : "h-9 w-9 bg-ink/70 text-2xl text-cream hover:bg-ink"
+      } ${dir === "l" ? "left-2 sm:left-4" : "right-2 sm:right-4"}`}
     >
       {dir === "l" ? "‹" : "›"}
     </button>
