@@ -55,7 +55,7 @@ test("buildTickerItems: in-progress shows lead + next game + promo", () => {
   expect(items[0]).toBe("NEW YORK LEADS 2–1");
   expect(items.some((i) => /^GAME 4 — .*ET$/.test(i))).toBe(true);
   expect(items).toContain("FREE SHIPPING ON EVERY ORDER");
-  expect(items).toContain("THE FINALS DROP");
+  expect(items).toContain("NEW DROP EVERY DAY");
 });
 
 test("buildTickerItems: series won (Finals) shows champions, no game line", () => {

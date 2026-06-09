@@ -138,7 +138,7 @@ export function buildTickerItems(s: SeriesState): string[] {
   }
 
   items.push("FREE SHIPPING ON EVERY ORDER");
-  items.push("THE FINALS DROP");
+  items.push("NEW DROP EVERY DAY");
   items.push("SHIPPED FROM NEW JERSEY · 2–3 DAYS");
   return items;
 }

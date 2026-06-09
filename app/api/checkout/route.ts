@@ -7,6 +7,7 @@ export const runtime = "nodejs";
 
 interface CartLine {
   productId: string;
+  colorName: string;
   size: Size;
   qty: number;
 }
@@ -33,8 +34,8 @@ export async function POST(request: Request) {
   const printify_items: PrintifyItem[] = [];
 
   try {
-    for (const { productId, size, qty } of cart) {
-      const { name, priceCents, item } = resolveLine(productId, size);
+    for (const { productId, colorName, size, qty } of cart) {
+      const { name, priceCents, item } = resolveLine(productId, colorName, size);
       const quantity = Math.min(10, Math.max(1, Math.floor(Number(qty) || 1)));
       line_items.push({
         price_data: {

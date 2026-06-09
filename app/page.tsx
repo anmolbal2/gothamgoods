@@ -1,21 +1,23 @@
-import { listProducts, type Size } from "@/lib/catalog";
+import { listProducts } from "@/lib/catalog";
 import { heroEyebrow } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
-import TeeMockup from "@/app/components/TeeMockup";
 import FinalsTracker from "@/app/components/FinalsTracker";
-import { AddToCart } from "@/app/components/cart";
+import ProductCard from "@/app/components/ProductCard";
 
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
 
-function money(cents: number) {
-  return `$${(cents / 100).toFixed(2)}`;
-}
+const HERO_LINES = [
+  "MY MAYOR MUSLIM",
+  "MY BAGEL JEWISH",
+  "MY CHRISTIAN DIOR",
+  "KNICKS IN FOUR",
+];
 
 export default async function Home() {
   const products = listProducts();
-  const hero = products[0];
   const series = await getSeriesState();
+  const heroImage = products[0]?.colors[0]?.image;
 
   return (
     <>
@@ -29,72 +31,34 @@ export default async function Home() {
           <div className="grid items-center gap-10 lg:grid-cols-2">
             <div>
               <h1 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl">
-                {hero.design?.lines.map((line, i) => (
+                {HERO_LINES.map((line, i) => (
                   <span
                     key={i}
-                    className={`block ${
-                      i === hero.design?.accentLineIndex ? "text-orange" : ""
-                    }`}
+                    className={`block ${i === HERO_LINES.length - 1 ? "text-orange" : ""}`}
                   >
                     {line}
                   </span>
                 ))}
               </h1>
-              {hero.blurb && (
-                <p className="mt-6 max-w-md text-lg text-white/75">{hero.blurb}</p>
-              )}
+              <p className="mt-6 max-w-md text-lg text-white/75">
+                Officially unofficial New York fan merch. New drop every day of the run
+                — heavyweight Comfort Colors tees, free shipping from New Jersey.
+              </p>
+              <a
+                href="#shop"
+                className="mt-8 inline-block bg-orange px-6 py-3 font-mono text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-orange-bright"
+              >
+                Shop the drop ↓
+              </a>
             </div>
 
             <div className="px-6">
-              {hero.image ? (
+              {heroImage ? (
                 <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white p-3 shadow-xl">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={hero.image} alt={hero.name} className="w-full" />
+                  <img src={heroImage} alt="Gotham Goods tee" className="w-full" />
                 </div>
-              ) : hero.design ? (
-                <TeeMockup design={hero.design} size="lg" className="max-w-md" />
               ) : null}
-            </div>
-          </div>
-
-          {/* Featured buy card */}
-          <div
-            data-testid="product-card"
-            data-product={hero.id}
-            className="mt-12 grid gap-6 border-2 border-white/15 bg-blue-deep p-6 sm:grid-cols-[1fr_18rem] sm:items-center"
-          >
-            <div>
-              {hero.tagline && (
-                <span className="inline-block bg-orange px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink">
-                  {hero.tagline}
-                </span>
-              )}
-              <span className="ml-2 inline-block border border-white/30 px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-white">
-                Free Shipping
-              </span>
-              <h2
-                data-testid="product-name"
-                className="mt-3 font-display text-3xl uppercase tracking-tight"
-              >
-                {hero.name}
-              </h2>
-              <p className="mt-1 font-mono text-sm uppercase tracking-widest text-white/60">
-                Unisex heavyweight tee · runs true to size
-              </p>
-            </div>
-            <div>
-              <p className="mb-3 font-display text-3xl text-orange">
-                {money(hero.priceCents)}
-              </p>
-              <AddToCart
-                productId={hero.id}
-                sizes={Object.keys(hero.variants) as Size[]}
-                priceCents={hero.priceCents}
-                variant="hero"
-              />
-              <p className="mt-3 text-center font-mono text-[11px] uppercase tracking-widest text-white/60">
-                🚚 Free shipping · ships from NJ in 2–3 days
-              </p>
             </div>
           </div>
         </div>
@@ -104,71 +68,23 @@ export default async function Home() {
       <FinalsTracker state={series} />
 
       {/* THE DROP */}
-      <section className="mx-auto max-w-6xl px-5 py-16">
+      <section id="shop" className="mx-auto max-w-6xl px-5 py-16">
         <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
           <h2 className="font-display text-4xl uppercase tracking-tight">The Drop</h2>
           <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-            {products.length} {products.length === 1 ? "style" : "styles"} · more weekly
+            {products.length} styles · new drop every day
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <article key={p.id} className="flex flex-col border-2 border-ink bg-paper">
-              <div className={p.image ? "bg-white p-4" : "bg-blue p-6"}>
-                {p.image ? (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    src={p.image}
-                    alt={p.name}
-                    className="mx-auto aspect-square w-full max-w-[260px] object-contain"
-                  />
-                ) : p.design ? (
-                  <TeeMockup design={p.design} size="sm" className="max-w-[220px]" />
-                ) : null}
-              </div>
-              <div className="flex flex-1 flex-col p-5">
-                {p.tagline && (
-                  <span className="mb-2 inline-block self-start bg-orange px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
-                    {p.tagline}
-                  </span>
-                )}
-                <div className="flex items-baseline justify-between gap-2">
-                  <h3 className="font-display text-xl uppercase tracking-tight">
-                    {p.name}
-                  </h3>
-                  <span className="font-display text-xl text-orange">
-                    {money(p.priceCents)}
-                  </span>
-                </div>
-                <p className="mt-1 font-mono text-[11px] font-bold uppercase tracking-widest text-orange">
-                  Free shipping
-                </p>
-                {p.blurb && (
-                  <p className="mt-2 line-clamp-3 text-sm text-ink/70">{p.blurb}</p>
-                )}
-                <div className="mt-auto pt-4">
-                  <AddToCart
-                    productId={p.id}
-                    sizes={Object.keys(p.variants) as Size[]}
-                    priceCents={p.priceCents}
-                    variant="card"
-                  />
-                </div>
-              </div>
-            </article>
+            <ProductCard key={p.id} product={p} />
           ))}
-
-          {/* Teaser tile — clearly not purchasable */}
-          <article className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-ink/30 bg-cream p-10 text-center">
-            <span className="font-display text-2xl uppercase tracking-tight text-ink/40">
-              Dropping next
-            </span>
-            <p className="font-mono text-xs uppercase tracking-widest text-ink/40">
-              New tee every week of the run
-            </p>
-          </article>
         </div>
+
+        <p className="mt-8 text-center font-mono text-xs uppercase tracking-widest text-ink/40">
+          New design drops every day of the finals run — check back daily.
+        </p>
       </section>
     </>
   );

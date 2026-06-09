@@ -7,10 +7,12 @@ import {
   useEffect,
   useState,
 } from "react";
-import { CATALOG, SIZE_ORDER, type Size } from "@/lib/catalog";
+import { CATALOG } from "@/lib/catalog";
+import type { Size } from "@/lib/catalog";
 
 export interface CartItem {
   productId: string;
+  colorName: string;
   size: Size;
   qty: number;
 }
@@ -18,14 +20,15 @@ export interface CartItem {
 function money(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
+const keyOf = (p: string, c: string, s: string) => `${p}__${c}__${s}`;
 
 interface CartContextValue {
   items: CartItem[];
   count: number;
   subtotalCents: number;
-  add: (productId: string, size: Size) => void;
-  setQty: (productId: string, size: Size, qty: number) => void;
-  remove: (productId: string, size: Size) => void;
+  add: (productId: string, colorName: string, size: Size) => void;
+  setQty: (productId: string, colorName: string, size: Size, qty: number) => void;
+  remove: (productId: string, colorName: string, size: Size) => void;
   open: boolean;
   setOpen: (v: boolean) => void;
   checkout: () => Promise<void>;
@@ -49,7 +52,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     try {
-      const saved = localStorage.getItem("gg_cart");
+      const saved = localStorage.getItem("gg_cart_v2");
       if (saved) setItems(JSON.parse(saved));
     } catch {
       /* ignore */
@@ -57,42 +60,46 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
   }, []);
   useEffect(() => {
     try {
-      localStorage.setItem("gg_cart", JSON.stringify(items));
+      localStorage.setItem("gg_cart_v2", JSON.stringify(items));
     } catch {
       /* ignore */
     }
   }, [items]);
 
-  const add = useCallback((productId: string, size: Size) => {
+  const add = useCallback((productId: string, colorName: string, size: Size) => {
     setItems((prev) => {
-      const i = prev.findIndex((x) => x.productId === productId && x.size === size);
+      const k = keyOf(productId, colorName, size);
+      const i = prev.findIndex((x) => keyOf(x.productId, x.colorName, x.size) === k);
       if (i >= 0) {
         const next = [...prev];
         next[i] = { ...next[i], qty: Math.min(10, next[i].qty + 1) };
         return next;
       }
-      return [...prev, { productId, size, qty: 1 }];
+      return [...prev, { productId, colorName, size, qty: 1 }];
     });
     setError(null);
     setOpen(true);
   }, []);
 
-  const setQty = useCallback((productId: string, size: Size, qty: number) => {
-    setItems((prev) =>
-      prev
-        .map((x) =>
-          x.productId === productId && x.size === size
-            ? { ...x, qty: Math.max(0, Math.min(10, qty)) }
-            : x,
-        )
-        .filter((x) => x.qty > 0),
-    );
-  }, []);
+  const setQty = useCallback(
+    (productId: string, colorName: string, size: Size, qty: number) => {
+      const k = keyOf(productId, colorName, size);
+      setItems((prev) =>
+        prev
+          .map((x) =>
+            keyOf(x.productId, x.colorName, x.size) === k
+              ? { ...x, qty: Math.max(0, Math.min(10, qty)) }
+              : x,
+          )
+          .filter((x) => x.qty > 0),
+      );
+    },
+    [],
+  );
 
-  const remove = useCallback((productId: string, size: Size) => {
-    setItems((prev) =>
-      prev.filter((x) => !(x.productId === productId && x.size === size)),
-    );
+  const remove = useCallback((productId: string, colorName: string, size: Size) => {
+    const k = keyOf(productId, colorName, size);
+    setItems((prev) => prev.filter((x) => keyOf(x.productId, x.colorName, x.size) !== k));
   }, []);
 
   const subtotalCents = items.reduce(
@@ -159,56 +166,6 @@ export function CartButton() {
   );
 }
 
-export function AddToCart({
-  productId,
-  sizes,
-  priceCents,
-  variant = "card",
-}: {
-  productId: string;
-  sizes: Size[];
-  priceCents: number;
-  variant?: "hero" | "card";
-}) {
-  const { add } = useCart();
-  const ordered = SIZE_ORDER.filter((s) => sizes.includes(s));
-  const [size, setSize] = useState<Size>(
-    ordered.includes("M") ? "M" : ordered[0] ?? "M",
-  );
-
-  return (
-    <div className="flex flex-col gap-3">
-      <div className="flex flex-wrap gap-2">
-        {ordered.map((s) => (
-          <button
-            key={s}
-            type="button"
-            onClick={() => setSize(s)}
-            aria-pressed={s === size}
-            className={`min-w-11 border-2 px-3 py-2 font-mono text-sm font-bold uppercase transition ${
-              s === size
-                ? "border-orange bg-orange text-ink"
-                : variant === "hero"
-                  ? "border-white/30 text-white hover:border-white"
-                  : "border-ink/20 text-ink hover:border-ink"
-            }`}
-          >
-            {s}
-          </button>
-        ))}
-      </div>
-      <button
-        type="button"
-        data-testid="add-to-cart"
-        onClick={() => add(productId, size)}
-        className="w-full bg-orange px-5 py-3.5 font-mono text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-orange-bright"
-      >
-        Add to cart — {money(priceCents)}
-      </button>
-    </div>
-  );
-}
-
 export function CartDrawer() {
   const {
     items,
@@ -261,18 +218,21 @@ export function CartDrawer() {
                 if (!p) return null;
                 return (
                   <li
-                    key={`${it.productId}-${it.size}`}
+                    key={keyOf(it.productId, it.colorName, it.size)}
                     className="flex items-start justify-between gap-3 border-b border-line pb-4"
                   >
                     <div>
                       <p className="font-bold">{p.name}</p>
                       <p className="font-mono text-xs uppercase tracking-widest text-ink/50">
-                        Size {it.size}
+                        {it.colorName} · {it.size}
                       </p>
                       <div className="mt-2 flex items-center gap-2">
                         <button
                           type="button"
-                          onClick={() => setQty(it.productId, it.size, it.qty - 1)}
+                          aria-label="Decrease quantity"
+                          onClick={() =>
+                            setQty(it.productId, it.colorName, it.size, it.qty - 1)
+                          }
                           className="h-7 w-7 border border-ink/30 font-mono leading-none hover:border-ink"
                         >
                           −
@@ -280,7 +240,10 @@ export function CartDrawer() {
                         <span className="w-6 text-center font-mono text-sm">{it.qty}</span>
                         <button
                           type="button"
-                          onClick={() => setQty(it.productId, it.size, it.qty + 1)}
+                          aria-label="Increase quantity"
+                          onClick={() =>
+                            setQty(it.productId, it.colorName, it.size, it.qty + 1)
+                          }
                           className="h-7 w-7 border border-ink/30 font-mono leading-none hover:border-ink"
                         >
                           +
@@ -291,7 +254,7 @@ export function CartDrawer() {
                       <p className="font-bold">{money(p.priceCents * it.qty)}</p>
                       <button
                         type="button"
-                        onClick={() => remove(it.productId, it.size)}
+                        onClick={() => remove(it.productId, it.colorName, it.size)}
                         className="mt-2 font-mono text-[11px] uppercase tracking-widest text-ink/40 hover:text-orange"
                       >
                         Remove
