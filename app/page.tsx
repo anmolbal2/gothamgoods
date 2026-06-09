@@ -43,8 +43,10 @@ export default function Home() {
 
             <div className="px-6">
               {hero.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img src={hero.image} alt={hero.name} className="mx-auto w-full max-w-md" />
+                <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white p-3 shadow-xl">
+                  {/* eslint-disable-next-line @next/next/no-img-element */}
+                  <img src={hero.image} alt={hero.name} className="w-full" />
+                </div>
               ) : hero.design ? (
                 <TeeMockup design={hero.design} size="lg" className="max-w-md" />
               ) : null}
@@ -103,13 +105,13 @@ export default function Home() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
             <article key={p.id} className="flex flex-col border-2 border-ink bg-paper">
-              <div className="bg-blue p-6">
+              <div className={p.image ? "bg-white p-4" : "bg-blue p-6"}>
                 {p.image ? (
                   // eslint-disable-next-line @next/next/no-img-element
                   <img
                     src={p.image}
                     alt={p.name}
-                    className="mx-auto aspect-square w-full max-w-[220px] object-contain"
+                    className="mx-auto aspect-square w-full max-w-[260px] object-contain"
                   />
                 ) : p.design ? (
                   <TeeMockup design={p.design} size="sm" className="max-w-[220px]" />

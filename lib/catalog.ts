@@ -46,10 +46,12 @@ export const CATALOG: Record<string, Product> = {
   "knicks-in-four": {
     name: "Knicks in Four Tee",
     priceCents: 3400, // $34.00 — adjust to your retail price
-    image: "", // no Printify mockup yet -> CSS tee mockup renders from `design`
+    // Real Printify front mockup. If blank, the CSS tee mockup (design) renders instead.
+    image:
+      "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/unisex-garment-dyed-t-shirt.jpg?camera_label=front",
     tagline: "THE FINALS DROP",
     blurb:
-      "The whole city is saying it, so we put it on a shirt. Heavyweight unisex cotton, shipped from New Jersey so it lands before the series ends.",
+      "The whole city is saying it, so we put it on a shirt. Heavyweight unisex Comfort Colors cotton, shipped from New Jersey so it lands before the series ends.",
     design: {
       lines: ["MY MAYOR MUSLIM", "MY BAGEL JEWISH", "MY CHRISTIAN DIOR", "KNICKS IN FOUR"],
       accentLineIndex: 3,
