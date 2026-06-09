@@ -410,6 +410,115 @@ export const CATALOG: Record<string, Product> = {
         }
       }
     ]
+  },
+  "he-is-my-everything": {
+    "name": "He Is My Everything Tee",
+    "priceCents": 3999,
+    "tagline": "HE IS MY FATHER",
+    "blurb": "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
+    "printifyProductId": "6a27dd8575aae553c70ecf64",
+    "colors": [
+      {
+        "name": "White",
+        "swatch": "#efece2",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73207/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73207/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73207/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73207/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73207/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79169,
+          "S": 73199,
+          "M": 73203,
+          "XL": 73211,
+          "L": 73207,
+          "XXL": 73215,
+          "4XL": 101476
+        }
+      },
+      {
+        "name": "Pepper",
+        "swatch": "#575450",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79048/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79048/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79048/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79048/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79048/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79155,
+          "L": 79048,
+          "XL": 79049,
+          "S": 79046,
+          "M": 79047,
+          "XXL": 79050,
+          "4XL": 101463
+        }
+      },
+      {
+        "name": "Grey",
+        "swatch": "#b9bbbb",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79137,
+          "L": 78973,
+          "M": 78972,
+          "XL": 78974,
+          "S": 78971,
+          "XXL": 78975,
+          "4XL": 101445
+        }
+      },
+      {
+        "name": "Granite",
+        "swatch": "#9b9a94",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73982/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73982/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73982/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73982/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/73982/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79133,
+          "L": 73982,
+          "XL": 73989,
+          "S": 73968,
+          "M": 73975,
+          "XXL": 73996,
+          "4XL": 101441
+        }
+      },
+      {
+        "name": "Mystic Blue",
+        "swatch": "#5f7e93",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79151,
+          "L": 79033,
+          "S": 79031,
+          "XL": 79034,
+          "M": 79032,
+          "XXL": 79035,
+          "4XL": 101459
+        }
+      }
+    ]
   }
 };
 

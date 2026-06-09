@@ -48,6 +48,15 @@ const PRODUCTS = [
       "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
     views: ["front", "person-5-context", "person-5-context-2", "folded"],
   },
+  {
+    id: "6a27dd8575aae553c70ecf64",
+    key: "he-is-my-everything",
+    name: "He Is My Everything Tee",
+    tagline: "HE IS MY FATHER",
+    blurb:
+      "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
+    views: ["front", "person-1-front", "person-2", "person-5-context"],
+  },
 ];
 
 // Swatch hexes + color display order.
@@ -55,11 +64,12 @@ const SWATCH = {
   White: "#efece2",
   Black: "#1c1c1c",
   Graphite: "#4f5356",
+  Pepper: "#575450",
   Grey: "#b9bbbb",
   Granite: "#9b9a94",
   "Mystic Blue": "#5f7e93",
 };
-const COLOR_ORDER = ["White", "Black", "Graphite", "Grey", "Granite", "Mystic Blue"];
+const COLOR_ORDER = ["White", "Black", "Graphite", "Pepper", "Grey", "Granite", "Mystic Blue"];
 const SIZE_ALIAS = { "2XL": "XXL" };
 const SIZE_ORDER = ["S", "M", "L", "XL", "XXL", "3XL", "4XL"];
 
@@ -123,7 +133,7 @@ function buildColors(p, views = DEFAULT_VIEWS) {
     let images = views.filter((l) => byLabel[l]).map((l) => byLabel[l]);
     if (images.length < 2) {
       const rest = Object.entries(byLabel)
-        .filter(([l]) => !PREFERRED.includes(l))
+        .filter(([l]) => !views.includes(l))
         .map(([, src]) => src);
       images = [...images, ...rest];
     }
