@@ -65,7 +65,7 @@ export default async function ThankYouPage({
               You&apos;re in. 🏀
             </h1>
             <p className="mt-2 text-ink/70">
-              Printed and shipped from New Jersey — it lands in 2–3 days.
+              Shipped from New Jersey — it lands in 2–3 days.
               {email ? ` A receipt is on its way to ${email}.` : ""}
             </p>
 

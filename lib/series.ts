@@ -35,7 +35,7 @@ export const SERIES = {
     "NEW YORK LEADS 2–0",
     "GAME 3 — TONIGHT 8:00 ET",
     "THE FINALS DROP",
-    "PRINTED + SHIPPED FROM NEW JERSEY",
+    "SHIPPED FROM NEW JERSEY",
     "2–3 DAY DELIVERY",
   ],
 };

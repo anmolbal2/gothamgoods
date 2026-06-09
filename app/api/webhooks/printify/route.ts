@@ -38,7 +38,7 @@ function shippedEmailHtml(trackingNumber?: string, trackingUrl?: string): string
   return `
     <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;color:#171717">
       <h1 style="font-size:22px">Your Gotham Goods order shipped 📦</h1>
-      <p style="font-size:16px">It's on the way — printed and shipped from NJ, arriving in 2–3 days.</p>
+      <p style="font-size:16px">It's on the way — shipped from NJ, arriving in 2–3 days.</p>
       ${tracking}
       ${button}
       <p style="color:#777;font-size:13px;margin-top:32px">Gotham Goods — officially unofficial NY fan merch.</p>

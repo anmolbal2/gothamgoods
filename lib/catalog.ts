@@ -49,7 +49,7 @@ export const CATALOG: Record<string, Product> = {
     image: "", // no Printify mockup yet -> CSS tee mockup renders from `design`
     tagline: "THE FINALS DROP",
     blurb:
-      "The whole city is saying it, so we put it on a shirt. Heavyweight unisex cotton, printed and shipped from New Jersey so it lands before the series ends.",
+      "The whole city is saying it, so we put it on a shirt. Heavyweight unisex cotton, shipped from New Jersey so it lands before the series ends.",
     design: {
       lines: ["MY MAYOR MUSLIM", "MY BAGEL JEWISH", "MY CHRISTIAN DIOR", "KNICKS IN FOUR"],
       accentLineIndex: 3,
