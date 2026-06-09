@@ -21,7 +21,7 @@ function Arrow({
       }}
       className={`absolute top-1/2 z-10 flex -translate-y-1/2 items-center justify-center rounded-full leading-none ${
         light
-          ? "h-12 w-12 bg-white/20 text-3xl text-white hover:bg-white/35"
+          ? "h-12 w-12 bg-ink/70 text-3xl text-white ring-1 ring-white/40 backdrop-blur hover:bg-ink/90"
           : "h-9 w-9 bg-ink/70 text-2xl text-cream hover:bg-ink"
       } ${dir === "l" ? "left-2 sm:left-4" : "right-2 sm:right-4"}`}
     >
@@ -128,6 +128,12 @@ export default function ProductGallery({
           >
             ✕
           </button>
+          {multi && (
+            <>
+              <Arrow dir="l" light onClick={() => go(-1)} />
+              <Arrow dir="r" light onClick={() => go(1)} />
+            </>
+          )}
           <div
             className="relative flex max-w-3xl items-center"
             onClick={(e) => e.stopPropagation()}
@@ -145,12 +151,6 @@ export default function ProductGallery({
                 multi ? "cursor-pointer" : ""
               }`}
             />
-            {multi && (
-              <>
-                <Arrow dir="l" light onClick={() => go(-1)} />
-                <Arrow dir="r" light onClick={() => go(1)} />
-              </>
-            )}
           </div>
           {multi && (
             <div className="absolute bottom-5 left-1/2 -translate-x-1/2 font-mono text-xs uppercase tracking-widest text-white/70">
