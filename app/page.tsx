@@ -1,108 +1,158 @@
 import { listProducts, type Size } from "@/lib/catalog";
-import BuyButton from "@/app/components/BuyButton";
+import { SERIES } from "@/lib/series";
+import TeeMockup from "@/app/components/TeeMockup";
+import FinalsTracker from "@/app/components/FinalsTracker";
+import { AddToCart } from "@/app/components/cart";
 
-function priceLabel(cents: number) {
+function money(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
-}
-
-/** Branded placeholder shown until a real Printify mockup URL is set on the product. */
-function MockupTile({ name }: { name: string }) {
-  return (
-    <div className="relative flex aspect-square w-full items-center justify-center overflow-hidden bg-brand-ink">
-      <div
-        className="absolute inset-0 opacity-25"
-        style={{
-          backgroundImage:
-            "radial-gradient(circle at 30% 20%, #ff5a1f, transparent 55%)",
-        }}
-      />
-      <span className="relative px-6 text-center text-2xl font-black uppercase leading-tight tracking-tight text-white">
-        {name}
-      </span>
-    </div>
-  );
 }
 
 export default function Home() {
   const products = listProducts();
+  const hero = products[0];
 
   return (
     <>
-      {/* Hero */}
-      <section className="bg-brand-ink text-white">
-        <div className="mx-auto max-w-6xl px-5 py-20 sm:py-28">
-          <p className="mb-4 inline-flex items-center gap-2 rounded-full border border-white/15 px-3 py-1 text-xs font-medium uppercase tracking-widest text-white/70">
-            <span className="h-1.5 w-1.5 rounded-full bg-brand" /> New York · Print on
-            demand
+      {/* HERO */}
+      <section className="bg-blue text-white">
+        <div className="mx-auto max-w-6xl px-5 py-14 sm:py-20">
+          <p className="mb-6 font-mono text-xs uppercase tracking-[0.25em] text-orange">
+            Back page · The Finals Drop · {SERIES.teamName} up {SERIES.wins}–
+            {SERIES.losses}
           </p>
-          <h1 className="max-w-3xl text-4xl font-black leading-[1.05] tracking-tight sm:text-6xl">
-            Officially unofficial <span className="text-brand">NY fan merch.</span>
-          </h1>
-          <p className="mt-5 max-w-xl text-lg text-white/70">
-            Heavyweight tees designed for the five boroughs. Printed on demand and
-            shipped from New Jersey in 2–3 days.
-          </p>
-          <a
-            href="#shop"
-            className="mt-8 inline-block rounded-lg bg-brand px-6 py-3 font-semibold text-white transition hover:opacity-90"
+
+          <div className="grid items-center gap-10 lg:grid-cols-2">
+            <div>
+              <h1 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl">
+                {hero.design?.lines.map((line, i) => (
+                  <span
+                    key={i}
+                    className={`block ${
+                      i === hero.design?.accentLineIndex ? "text-orange" : ""
+                    }`}
+                  >
+                    {line}
+                  </span>
+                ))}
+              </h1>
+              {hero.blurb && (
+                <p className="mt-6 max-w-md text-lg text-white/75">{hero.blurb}</p>
+              )}
+            </div>
+
+            <div className="px-6">
+              {hero.image ? (
+                // eslint-disable-next-line @next/next/no-img-element
+                <img src={hero.image} alt={hero.name} className="mx-auto w-full max-w-md" />
+              ) : hero.design ? (
+                <TeeMockup design={hero.design} size="lg" className="max-w-md" />
+              ) : null}
+            </div>
+          </div>
+
+          {/* Featured buy card */}
+          <div
+            data-testid="product-card"
+            data-product={hero.id}
+            className="mt-12 grid gap-6 border-2 border-white/15 bg-blue-deep p-6 sm:grid-cols-[1fr_18rem] sm:items-center"
           >
-            Shop the drop
-          </a>
+            <div>
+              {hero.tagline && (
+                <span className="inline-block bg-orange px-2 py-1 font-mono text-[11px] font-bold uppercase tracking-widest text-ink">
+                  {hero.tagline}
+                </span>
+              )}
+              <h2
+                data-testid="product-name"
+                className="mt-3 font-display text-3xl uppercase tracking-tight"
+              >
+                {hero.name}
+              </h2>
+              <p className="mt-1 font-mono text-sm uppercase tracking-widest text-white/60">
+                Unisex heavyweight tee · runs true to size
+              </p>
+            </div>
+            <div>
+              <p className="mb-3 font-display text-3xl text-orange">
+                {money(hero.priceCents)}
+              </p>
+              <AddToCart
+                productId={hero.id}
+                sizes={Object.keys(hero.variants) as Size[]}
+                priceCents={hero.priceCents}
+                variant="hero"
+              />
+            </div>
+          </div>
         </div>
       </section>
 
-      {/* Collection grid */}
-      <section id="shop" className="mx-auto max-w-6xl px-5 py-16">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="text-2xl font-extrabold tracking-tight">The collection</h2>
-          <p className="text-sm text-muted">
-            {products.length} styles · ships from NJ
+      {/* LIVE FINALS TRACKER */}
+      <FinalsTracker />
+
+      {/* THE DROP */}
+      <section className="mx-auto max-w-6xl px-5 py-16">
+        <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
+          <h2 className="font-display text-4xl uppercase tracking-tight">The Drop</h2>
+          <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
+            {products.length} {products.length === 1 ? "style" : "styles"} · more weekly
           </p>
         </div>
 
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((p) => (
-            <article
-              key={p.id}
-              data-testid="product-card"
-              data-product={p.id}
-              className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition hover:shadow-md"
-            >
-              {p.image ? (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  src={p.image}
-                  alt={p.name}
-                  className="aspect-square w-full object-cover"
-                />
-              ) : (
-                <MockupTile name={p.name} />
-              )}
-
+            <article key={p.id} className="flex flex-col border-2 border-ink bg-paper">
+              <div className="bg-blue p-6">
+                {p.image ? (
+                  // eslint-disable-next-line @next/next/no-img-element
+                  <img
+                    src={p.image}
+                    alt={p.name}
+                    className="mx-auto aspect-square w-full max-w-[220px] object-contain"
+                  />
+                ) : p.design ? (
+                  <TeeMockup design={p.design} size="sm" className="max-w-[220px]" />
+                ) : null}
+              </div>
               <div className="flex flex-1 flex-col p-5">
-                <div className="flex items-start justify-between gap-3">
-                  <h3
-                    data-testid="product-name"
-                    className="text-lg font-bold tracking-tight"
-                  >
+                {p.tagline && (
+                  <span className="mb-2 inline-block self-start bg-orange px-2 py-0.5 font-mono text-[10px] font-bold uppercase tracking-widest text-ink">
+                    {p.tagline}
+                  </span>
+                )}
+                <div className="flex items-baseline justify-between gap-2">
+                  <h3 className="font-display text-xl uppercase tracking-tight">
                     {p.name}
                   </h3>
-                  <span className="shrink-0 rounded-md bg-background px-2 py-1 text-sm font-semibold">
-                    {priceLabel(p.priceCents)}
+                  <span className="font-display text-xl text-orange">
+                    {money(p.priceCents)}
                   </span>
                 </div>
-
-                {p.blurb && <p className="mt-2 text-sm text-muted">{p.blurb}</p>}
-
-                <div className="mt-auto">
-                  <BuyButton
+                {p.blurb && (
+                  <p className="mt-2 line-clamp-3 text-sm text-ink/70">{p.blurb}</p>
+                )}
+                <div className="mt-auto pt-4">
+                  <AddToCart
                     productId={p.id}
                     sizes={Object.keys(p.variants) as Size[]}
+                    priceCents={p.priceCents}
+                    variant="card"
                   />
                 </div>
               </div>
             </article>
           ))}
+
+          {/* Teaser tile — clearly not purchasable */}
+          <article className="flex flex-col items-center justify-center gap-2 border-2 border-dashed border-ink/30 bg-cream p-10 text-center">
+            <span className="font-display text-2xl uppercase tracking-tight text-ink/40">
+              Dropping next
+            </span>
+            <p className="font-mono text-xs uppercase tracking-widest text-ink/40">
+              New tee every week of the run
+            </p>
+          </article>
         </div>
       </section>
     </>

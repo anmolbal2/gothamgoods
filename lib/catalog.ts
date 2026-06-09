@@ -11,15 +11,29 @@
 
 export type Size = "S" | "M" | "L" | "XL" | "XXL";
 
+/** Front-of-shirt print, rendered as a CSS mockup until a real Printify image exists. */
+export interface TeeDesign {
+  /** Print lines, top to bottom. */
+  lines: string[];
+  /** Index of the line drawn in orange (the punchline). */
+  accentLineIndex?: number;
+  /** Garment color of the mockup. */
+  shirtColor?: "white" | "blue";
+}
+
 export interface Product {
   /** Display name, also used as the Stripe line-item name. */
   name: string;
   /** Price in cents. Authoritative — the browser never sends prices. */
   priceCents: number;
-  /** Mockup image URL (real Printify CDN url, or "" to render a branded placeholder tile). */
+  /** Mockup image URL (real Printify CDN url, or "" to render the CSS tee mockup). */
   image: string;
+  /** Small label/eyebrow shown on the card, e.g. "THE FINALS DROP". */
+  tagline?: string;
   /** Short marketing blurb shown on the card. */
   blurb?: string;
+  /** CSS tee mockup (used when `image` is empty). */
+  design?: TeeDesign;
   /** Published Printify product id. */
   printifyProductId: string;
   /** Map of size -> Printify variant id. */
@@ -29,11 +43,18 @@ export interface Product {
 export const CATALOG: Record<string, Product> = {
   // Real published product in the GothamGoods Printify shop (id 27855301),
   // pulled via scripts/fetch-catalog.mjs. Add more products by appending objects.
-  "gotham-garment-dyed-tee": {
-    name: "Gotham Goods Garment-Dyed Tee",
+  "knicks-in-four": {
+    name: "Knicks in Four Tee",
     priceCents: 3400, // $34.00 — adjust to your retail price
-    image: "", // no Printify mockup generated yet -> branded placeholder tile renders
-    blurb: "Premium garment-dyed heavyweight cotton. Lived-in softness, vintage wash.",
+    image: "", // no Printify mockup yet -> CSS tee mockup renders from `design`
+    tagline: "THE FINALS DROP",
+    blurb:
+      "The whole city is saying it, so we put it on a shirt. Heavyweight unisex cotton, printed and shipped from New Jersey so it lands before the series ends.",
+    design: {
+      lines: ["MY MAYOR MUSLIM", "MY BAGEL JEWISH", "MY CHRISTIAN DIOR", "KNICKS IN FOUR"],
+      accentLineIndex: 3,
+      shirtColor: "white",
+    },
     printifyProductId: "6a27897a8f2246d09f0acb65",
     variants: { S: 73199, M: 73203, L: 73207, XL: 73211, XXL: 73215 },
   },

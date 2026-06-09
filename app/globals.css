@@ -1,31 +1,55 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f7f5f2; /* warm off-white */
-  --foreground: #141414; /* ink */
-  --brand: #ff5a1f; /* NY orange */
-  --brand-ink: #0a0a0a; /* near-black */
-  --brand-blue: #1d4ed8;
-  --muted: #6b6b6b;
-  --card: #ffffff;
-  --border: #e7e2da;
+  --cream: #f4efe2; /* newsprint off-white */
+  --ink: #0b1020; /* near-black navy */
+  --blue: #1c3aa1; /* knicks royal */
+  --blue-deep: #142a78;
+  --orange: #f5821f; /* knicks orange */
+  --orange-bright: #ff6a1a;
+  --paper: #ffffff;
+  --line: #e3dcc9;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --color-brand: var(--brand);
-  --color-brand-ink: var(--brand-ink);
-  --color-brand-blue: var(--brand-blue);
-  --color-muted: var(--muted);
-  --color-card: var(--card);
-  --color-border: var(--border);
+  --color-background: var(--cream);
+  --color-foreground: var(--ink);
+  --color-cream: var(--cream);
+  --color-ink: var(--ink);
+  --color-blue: var(--blue);
+  --color-blue-deep: var(--blue-deep);
+  --color-orange: var(--orange);
+  --color-orange-bright: var(--orange-bright);
+  --color-paper: var(--paper);
+  --color-line: var(--line);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --font-display: var(--font-anton);
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background: var(--cream);
+  color: var(--ink);
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Scrolling stats ticker */
+@keyframes gg-marquee {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+.gg-marquee {
+  animation: gg-marquee 32s linear infinite;
+}
+.gg-marquee:hover {
+  animation-play-state: paused;
+}
+@media (prefers-reduced-motion: reduce) {
+  .gg-marquee {
+    animation: none;
+  }
 }

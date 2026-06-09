@@ -30,7 +30,9 @@ test("Buy redirects to Stripe Checkout with the correct server-priced order", as
   await expect(card).toBeVisible();
   const productName = (await card.getByTestId("product-name").innerText()).trim();
 
-  await card.getByTestId("buy-button").click();
+  // Add to cart -> cart drawer opens -> checkout.
+  await card.getByTestId("add-to-cart").click();
+  await page.getByTestId("cart-checkout").click();
 
   // Redirects to the real Stripe-hosted checkout.
   await page.waitForURL(/checkout\.stripe\.com/, { timeout: 30_000 });
