@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { stripe } from "@/lib/stripe";
 import { PurchasePixel } from "@/app/components/PixelEvents";
+import { ClearCartOnArrival } from "@/app/components/cart";
 
 export const runtime = "nodejs";
 
@@ -47,6 +48,9 @@ export default async function ThankYouPage({
 
   return (
     <section className="mx-auto max-w-2xl px-5 py-16">
+      {/* Payment succeeded (session_id present) -> empty the cart, even if the
+          Stripe lookup below fails. */}
+      {session_id ? <ClearCartOnArrival /> : null}
       <div className="border-2 border-ink bg-paper p-8">
         {!session_id ? (
           <>

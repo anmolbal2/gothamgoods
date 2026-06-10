@@ -30,6 +30,7 @@ interface CartContextValue {
   add: (productId: string, colorName: string, size: Size) => void;
   setQty: (productId: string, colorName: string, size: Size, qty: number) => void;
   remove: (productId: string, colorName: string, size: Size) => void;
+  clear: () => void;
   open: boolean;
   setOpen: (v: boolean) => void;
   checkout: () => Promise<void>;
@@ -115,6 +116,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setItems((prev) => prev.filter((x) => keyOf(x.productId, x.colorName, x.size) !== k));
   }, []);
 
+  // Empty the cart AND its storage. Removing the key (not just the state) keeps this
+  // race-proof on the thank-you page: the clear effect runs before the provider's
+  // hydration effect, so hydration reads nothing and can't repopulate.
+  const clear = useCallback(() => {
+    setItems([]);
+    try {
+      localStorage.removeItem("gg_cart_v2");
+    } catch {
+      /* ignore */
+    }
+  }, []);
+
   const subtotalCents = items.reduce(
     (sum, it) => sum + (CATALOG[it.productId]?.priceCents ?? 0) * it.qty,
     0,
@@ -168,6 +181,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         add,
         setQty,
         remove,
+        clear,
         open,
         setOpen,
         checkout,
@@ -178,6 +192,18 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       {children}
     </CartContext.Provider>
   );
+}
+
+/**
+ * Clears the cart once on mount. Rendered on the /thank-you success page so the
+ * items the buyer just purchased don't linger. Returns null (no UI).
+ */
+export function ClearCartOnArrival() {
+  const { clear } = useCart();
+  useEffect(() => {
+    clear();
+  }, [clear]);
+  return null;
 }
 
 export function CartButton() {

@@ -2,6 +2,7 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { createOrder, sendToProduction, type PrintifyItem, type Recipient } from "@/lib/printify";
 import { getOrder, recordCreated, markInProduction } from "@/lib/orders-store";
+import { sendOrderConfirmationEmail } from "@/lib/email";
 import { sendEvents } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
@@ -139,6 +140,27 @@ export async function POST(request: Request) {
     //    create step is skipped and this resumes (no duplicate order).
     await sendToProduction(printifyOrderId);
     await markInProduction(session.id);
+
+    // Order-confirmation receipt. Non-fatal: a send failure must never 500 the
+    // webhook (which would re-run fulfillment). Human-readable line-item names
+    // aren't in the event, so retrieve them like the /thank-you page does. In
+    // offline tests this retrieve throws on the fake session id and is skipped.
+    try {
+      const full = await stripe.checkout.sessions.retrieve(session.id, {
+        expand: ["line_items"],
+      });
+      const items = (full.line_items?.data ?? []).map((li) => ({
+        name: li.description ?? "Item",
+        quantity: li.quantity ?? 1,
+      }));
+      await sendOrderConfirmationEmail({
+        to: full.customer_details?.email ?? recipient.email,
+        items,
+        totalCents: full.amount_total ?? session.amount_total ?? 0,
+      });
+    } catch (err) {
+      console.error("stripe webhook: confirmation email failed (non-fatal)", err);
+    }
 
     // Authoritative server-side Purchase for Meta — fired AFTER markInProduction so
     // Stripe retries can't double-count, and shares its event_id (the session id)
