@@ -137,12 +137,24 @@ export async function createAdWithCopy(args: {
     }),
   })) as { id?: string };
   if (!creative.id) throw new Error(`adcreative returned no id: ${JSON.stringify(creative)}`);
-  const ad = (await postForm(`${adAccount()}/ads`, {
-    name: `auto-${args.name}`,
-    adset_id: adSetId(),
-    creative: JSON.stringify({ creative_id: creative.id }),
-    status: "ACTIVE",
-  })) as { id?: string };
-  if (!ad.id) throw new Error(`ad returned no id: ${JSON.stringify(ad)}`);
-  return ad.id;
+  // If the ad fails (e.g. an account security checkpoint blocks publishing), drop
+  // the just-created creative so repeated failures don't litter the account.
+  try {
+    const ad = (await postForm(`${adAccount()}/ads`, {
+      name: `auto-${args.name}`,
+      adset_id: adSetId(),
+      creative: JSON.stringify({ creative_id: creative.id }),
+      status: "ACTIVE",
+    })) as { id?: string };
+    if (!ad.id) throw new Error(`ad returned no id: ${JSON.stringify(ad)}`);
+    return ad.id;
+  } catch (e) {
+    await deleteObject(String(creative.id)).catch(() => {});
+    throw e;
+  }
+}
+
+/** Best-effort delete of a Graph object (used to clean up orphaned creatives). */
+async function deleteObject(id: string): Promise<void> {
+  await fetch(`${GRAPH}/${id}?access_token=${encodeURIComponent(token())}`, { method: "DELETE" });
 }
