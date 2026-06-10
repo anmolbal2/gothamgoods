@@ -104,12 +104,14 @@ fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
                 © {year} Gotham Goods · Fan-made. Not affiliated with the NBA, any team,
                 or any brand.
               </p>
-              <Link
-                href="/privacy"
-                className="mt-3 inline-block font-mono text-[11px] uppercase tracking-widest text-cream/60 underline hover:text-cream"
-              >
-                Privacy Policy
-              </Link>
+              <div className="mt-3 flex flex-wrap gap-x-5 gap-y-2 font-mono text-[11px] uppercase tracking-widest text-cream/60">
+                <Link href="/privacy" className="underline hover:text-cream">
+                  Privacy Policy
+                </Link>
+                <Link href="/terms" className="underline hover:text-cream">
+                  Terms &amp; Conditions
+                </Link>
+              </div>
             </div>
           </footer>
 
