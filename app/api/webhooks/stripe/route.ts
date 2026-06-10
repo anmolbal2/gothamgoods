@@ -1,10 +1,13 @@
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
-import { createConfirmedOrder, type PrintifyItem, type Recipient } from "@/lib/printify";
-import { alreadyProcessed, markProcessed } from "@/lib/orders-store";
+import { createOrder, sendToProduction, type PrintifyItem, type Recipient } from "@/lib/printify";
+import { getOrder, recordCreated, markInProduction } from "@/lib/orders-store";
 import { sendEvents } from "@/lib/meta-capi";
 
 export const runtime = "nodejs";
+// Printify needs ~15-30s of cost-calculation before send_to_production is
+// accepted, and we poll for it inline — give the function room beyond the 10s default.
+export const maxDuration = 60;
 
 // The deprecated `shipping_details` and newer `collected_information.shipping_details`
 // are not both present in every SDK's typings, so we read through a loose shape.
@@ -84,14 +87,20 @@ export async function POST(request: Request) {
 
   const session = event.data.object as unknown as SessionLike;
 
-  // Idempotency — Stripe retries; never create two Printify orders for one session.
+  // Idempotency — Stripe retries (and may even retry a request it timed out on
+  // while we were still polling). Resume from where we left off; never create a
+  // second Printify order for one session.
+  let existing: { printifyOrderId: string; status: string } | null;
   try {
-    if (await alreadyProcessed(session.id)) {
-      return new Response("duplicate", { status: 200 });
-    }
+    existing = await getOrder(session.id);
   } catch (err) {
     console.error("stripe webhook: order-store lookup failed", err);
     return new Response("store error", { status: 500 });
+  }
+  // Anything past "created" (in_production / shipped) is already handled.
+  // Only a "created" row means "order made but not yet sent to production" -> resume.
+  if (existing && existing.status !== "created") {
+    return new Response("duplicate", { status: 200 });
   }
 
   // Parse the Printify items stashed at checkout time.
@@ -113,14 +122,25 @@ export async function POST(request: Request) {
   const recipient = buildRecipient(session);
 
   try {
-    const { printifyOrderId } = await createConfirmedOrder({
-      externalId: session.id,
-      recipient,
-      items,
-    });
-    await markProcessed(session.id, printifyOrderId, recipient.email);
+    // 1) Create the Printify order once, and persist the mapping BEFORE sending to
+    //    production. If a retry arrives, we reuse this id instead of re-creating.
+    let printifyOrderId = existing?.printifyOrderId;
+    if (!printifyOrderId) {
+      ({ printifyOrderId } = await createOrder({
+        externalId: session.id,
+        recipient,
+        items,
+      }));
+      await recordCreated(session.id, printifyOrderId, recipient.email);
+    }
 
-    // Authoritative server-side Purchase for Meta — fired AFTER markProcessed so
+    // 2) Send to production (polls until Printify finishes cost-calculation).
+    //    If it can't within budget, we throw -> 500 -> Stripe retries -> the
+    //    create step is skipped and this resumes (no duplicate order).
+    await sendToProduction(printifyOrderId);
+    await markInProduction(session.id);
+
+    // Authoritative server-side Purchase for Meta — fired AFTER markInProduction so
     // Stripe retries can't double-count, and shares its event_id (the session id)
     // with the browser Purchase on the thank-you page so Meta dedups them.
     // Non-fatal: a CAPI failure must never make this webhook 500 (which would

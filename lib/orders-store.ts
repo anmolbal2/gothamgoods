@@ -17,6 +17,7 @@ const useSupabase = Boolean(SUPABASE_URL && SUPABASE_SERVICE_ROLE_KEY);
 interface OrderRecord {
   orderId: string;
   email?: string;
+  status?: string;
   trackingNumber?: string;
   trackingUrl?: string;
 }
@@ -36,22 +37,39 @@ function supabase(): SupabaseClient {
   return _supabase;
 }
 
-/** True if this Stripe session has already produced a Printify order (idempotency). */
-export async function alreadyProcessed(sessionId: string): Promise<boolean> {
+export interface SessionOrder {
+  printifyOrderId: string;
+  status: string;
+}
+
+/**
+ * Look up the Printify order already created for this Stripe session, if any.
+ * Drives idempotency: the webhook creates the Printify order exactly once and
+ * persists the mapping here BEFORE sending to production, so a Stripe retry
+ * resumes (sends to production) instead of creating a duplicate order.
+ */
+export async function getOrder(sessionId: string): Promise<SessionOrder | null> {
   if (useSupabase) {
     const { data, error } = await supabase()
       .from("orders")
-      .select("session_id")
+      .select("printify_order_id,status")
       .eq("session_id", sessionId)
       .maybeSingle();
-    if (error) throw new Error(`Supabase alreadyProcessed: ${error.message}`);
-    return Boolean(data);
+    if (error) throw new Error(`Supabase getOrder: ${error.message}`);
+    return data
+      ? { printifyOrderId: data.printify_order_id, status: data.status ?? "created" }
+      : null;
   }
-  return mem.has(sessionId);
+  const rec = mem.get(sessionId);
+  return rec ? { printifyOrderId: rec.orderId, status: rec.status ?? "created" } : null;
 }
 
-/** Record that a session was fulfilled. Safe to rely on the session_id unique constraint. */
-export async function markProcessed(
+/**
+ * Record that a Printify order was created for this session (status "created").
+ * Idempotent: a concurrent insert hitting the session_id unique constraint is
+ * treated as success (the row already exists).
+ */
+export async function recordCreated(
   sessionId: string,
   orderId: string,
   email?: string,
@@ -59,16 +77,28 @@ export async function markProcessed(
   if (useSupabase) {
     const { error } = await supabase()
       .from("orders")
-      .insert({
-        session_id: sessionId,
-        printify_order_id: orderId,
-        email,
-        status: "created",
-      });
-    if (error) throw new Error(`Supabase markProcessed: ${error.message}`);
+      .insert({ session_id: sessionId, printify_order_id: orderId, email, status: "created" });
+    // 23505 = unique_violation: another delivery already recorded this session.
+    if (error && error.code !== "23505") {
+      throw new Error(`Supabase recordCreated: ${error.message}`);
+    }
     return;
   }
-  mem.set(sessionId, { orderId, email });
+  if (!mem.has(sessionId)) mem.set(sessionId, { orderId, email, status: "created" });
+}
+
+/** Mark a session's order as sent to production (terminal for the webhook). */
+export async function markInProduction(sessionId: string): Promise<void> {
+  if (useSupabase) {
+    const { error } = await supabase()
+      .from("orders")
+      .update({ status: "in_production", updated_at: new Date().toISOString() })
+      .eq("session_id", sessionId);
+    if (error) throw new Error(`Supabase markInProduction: ${error.message}`);
+    return;
+  }
+  const rec = mem.get(sessionId);
+  if (rec) rec.status = "in_production";
 }
 
 /** Attach tracking info to an order (looked up by Printify order id). */

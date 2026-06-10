@@ -56,6 +56,7 @@ export function createMockPrintify() {
 
       // --- printify endpoints ---
       const create = path.match(/^\/shops\/([^/]+)\/orders\.json$/);
+      const getOrder = path.match(/^\/shops\/([^/]+)\/orders\/([^/]+)\.json$/);
       const prod = path.match(
         /^\/shops\/([^/]+)\/orders\/([^/]+)\/send_to_production\.json$/,
       );
@@ -65,6 +66,13 @@ export function createMockPrintify() {
         calls.push({ type: "create", shop: create[1], body });
         if (wantFail) return send(500, { error: "mock printify failure" });
         return send(200, { id: "po_mock_1" });
+      }
+      // Order status poll. Real Printify sits in "cost-calculation" first; the
+      // mock returns "on-hold" immediately so sendToProduction() proceeds at once.
+      if (method === "GET" && getOrder) {
+        calls.push({ type: "get", shop: getOrder[1], orderId: getOrder[2] });
+        if (wantFail) return send(500, { error: "mock printify failure" });
+        return send(200, { id: getOrder[2], status: "on-hold" });
       }
       if (method === "POST" && prod) {
         calls.push({ type: "send_to_production", shop: prod[1], orderId: prod[2], body });
