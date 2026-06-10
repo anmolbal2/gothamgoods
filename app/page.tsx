@@ -74,7 +74,7 @@ export default async function Home() {
       <FinalsTracker state={series} />
 
       {/* THE DROP */}
-      <section id="shop" className="mx-auto max-w-6xl px-5 py-16">
+      <section id="shop" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16">
         <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
           <h2 className="font-display text-4xl uppercase tracking-tight">The Drop</h2>
           <p className="font-mono text-xs uppercase tracking-widest text-ink/60">

@@ -60,7 +60,7 @@ export default async function RootLayout({
   return (
     <html
       lang="en"
-      className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full antialiased`}
+      className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} h-full scroll-smooth antialiased`}
     >
       <body className="flex min-h-full flex-col bg-cream">
         {META_PIXEL_ID ? (

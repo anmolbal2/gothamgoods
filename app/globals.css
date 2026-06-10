@@ -44,12 +44,11 @@ body {
 }
 .gg-marquee {
   animation: gg-marquee 32s linear infinite;
+  will-change: transform; /* keep the scroll smooth on mobile (iOS) */
 }
 .gg-marquee:hover {
   animation-play-state: paused;
 }
-@media (prefers-reduced-motion: reduce) {
-  .gg-marquee {
-    animation: none;
-  }
-}
+/* Intentionally NOT disabled under prefers-reduced-motion: the ticker is a slow,
+   decorative brand element and should keep scrolling on phones (where Reduce Motion
+   / Low Power Mode is commonly on). */
