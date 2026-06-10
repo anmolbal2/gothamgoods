@@ -5,9 +5,10 @@ This repo has the full **tracking backbone** for TikTok conversion ads: a browse
 mirrors the Meta setup (see [META_ADS_SETUP.md](./META_ADS_SETUP.md)) almost exactly —
 same files, same dedup model, just TikTok's API + event names.
 
-> **Status (as of last edit): the Pixel is LIVE on prod and the Events API is built
-> but DORMANT** — it no-ops until `TIKTOK_EAPI_ACCESS_TOKEN` is set. The Pixel IDs are
-> already set locally and on Vercel (all environments). See "Current state" below.
+> **Status (as of last edit): the Pixel AND the Events API are both LIVE and verified
+> on prod.** All env vars (incl. `TIKTOK_EAPI_ACCESS_TOKEN`) are set locally and on
+> Vercel (all environments). A direct test `CompletePayment` returned `{code:0, OK}`.
+> See "Current state" below.
 
 ---
 
@@ -19,13 +20,15 @@ same files, same dedup model, just TikTok's API + event names.
 | Browser Pixel live on `gotham-goods.com` | ✅ deployed (commit that added TikTok tracking, on `main`) and verified in the live HTML |
 | `NEXT_PUBLIC_TIKTOK_PIXEL_ID`, `TIKTOK_PIXEL_ID` | ✅ set in `.env.local` AND Vercel (production + preview + development) = the pixel code |
 | `/api/feed/tiktok` | ✅ live (HTTP 200, XML) |
-| **`TIKTOK_EAPI_ACCESS_TOKEN`** | ⛔ **PENDING** — must be generated in Events Manager → Settings → Events API (behind the TikTok login; cannot be done by Claude). Until set, server EAPI no-ops. |
-| `TIKTOK_TEST_EVENT_CODE` | optional, unset (use temporarily for Test Events validation) |
+| **`TIKTOK_EAPI_ACCESS_TOKEN`** | ✅ set in `.env.local` AND Vercel (encrypted, all envs); prod redeployed so functions see it |
+| Server Events API verified | ✅ direct test `CompletePayment` (with `test_event_code`) returned `{code:0, OK}`; `phone` field accepted |
+| `TIKTOK_TEST_EVENT_CODE` | unset (test-only — never set in prod, it diverts real events to the test panel) |
 | TikTok Catalog feed registered in Catalog Manager | ⛔ pending (optional, for catalog/DSA ads) |
 
-**To finish the Events API:** generate the access token, then set it in `.env.local`
-and Vercel (sensitive, all envs) and **redeploy** (Vercel env changes need a redeploy
-to take effect). Then the server `CompletePayment` fires from the Stripe webhook.
+Both legs are live. The only remaining optional step is registering the catalog feed
+(below). The EAPI access token is a **60-day-ish credential pattern on most TikTok
+accounts — if server events silently stop, regenerate it** and re-set in Vercel +
+`.env.local`, then redeploy.
 
 ---
 
@@ -74,10 +77,9 @@ as before (loader not rendered, EAPI returns early).
 - **HTTP 200 ≠ success.** TikTok returns 200 even on logical errors, signalling
   success via `code: 0`. `lib/tiktok-eapi.ts` throws on a non-zero `code` (caught
   non-fatally by callers).
-- **Field-name caveat:** the live API docs are JS-gated, so the `user.phone` field name
-  couldn't be quoted verbatim. We use `phone` (correct for the v1.3 consolidated
-  `event/track` endpoint; legacy v1.2 used `phone_number`). If step 8 ("Verify eAPI")
-  ever flags the phone field, it's a one-line change in `lib/tiktok-eapi.ts`.
+- **Field name `phone` is confirmed correct** for the v1.3 `event/track` endpoint — a
+  live test event with a hashed `phone` returned `{code:0}` with no warning. (Legacy
+  v1.2 used `phone_number`; not relevant here.)
 
 ---
 
@@ -119,7 +121,7 @@ to catalog products. It auto-reflects whatever is in the deployed catalog.
 |---|---|---|
 | `NEXT_PUBLIC_TIKTOK_PIXEL_ID` | yes | `app/layout.tsx`, `lib/tiktok-pixel.ts` (the pixel code, baked into the browser bundle) |
 | `TIKTOK_PIXEL_ID` | no | `lib/tiktok-eapi.ts` — same value, used as `event_source_id` |
-| `TIKTOK_EAPI_ACCESS_TOKEN` | no | `lib/tiktok-eapi.ts` — Events API auth (**pending**) |
+| `TIKTOK_EAPI_ACCESS_TOKEN` | no | `lib/tiktok-eapi.ts` — Events API auth (set, encrypted, all envs) |
 | `TIKTOK_TEST_EVENT_CODE` | no | `lib/tiktok-eapi.ts` — Test Events validation only (remove in prod) |
 | `TIKTOK_EAPI_BASE` | no | `lib/tiktok-eapi.ts` — optional; defaults to `https://business-api.tiktok.com/open_api/v1.3` |
 
