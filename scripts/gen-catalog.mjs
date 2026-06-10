@@ -31,6 +31,15 @@ const PRODUCTS = [
     views: ["front", "person-1-front", "person-3-front", "person-3-context"],
   },
   {
+    id: "6a29dc8467f98a3d3e0345e0",
+    key: "knicks-in-five",
+    name: "Knicks in Five Tee",
+    tagline: "TRUMP KILLED THE VIBES",
+    blurb:
+      "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    views: ["front", "person-1-front", "person-2-front", "lifestyle"],
+  },
+  {
     id: "6a27c36891cf9037720216b7",
     key: "better-than-brunson",
     name: "Better Than Brunson Tee",
@@ -63,13 +72,16 @@ const PRODUCTS = [
 const SWATCH = {
   White: "#efece2",
   Black: "#1c1c1c",
+  Royal: "#1c4d92",
+  Orange: "#e3592a",
   Graphite: "#4f5356",
   Pepper: "#575450",
+  "Ice Grey": "#cfcecc",
   Grey: "#b9bbbb",
   Granite: "#9b9a94",
   "Mystic Blue": "#5f7e93",
 };
-const COLOR_ORDER = ["White", "Black", "Graphite", "Pepper", "Grey", "Granite", "Mystic Blue"];
+const COLOR_ORDER = ["White", "Black", "Royal", "Orange", "Graphite", "Pepper", "Ice Grey", "Grey", "Granite", "Mystic Blue"];
 const SIZE_ALIAS = { "2XL": "XXL" };
 // 4XL is intentionally omitted — we don't offer it (it left the size grid with a
 // lone button on its own row). Variants for it are dropped in buildColors below.
@@ -96,6 +108,7 @@ const EXCLUDE = new Set([
   "size-chart",
   "back",
   "person-1-back",
+  "person-2-back",
   "person-3-back",
   "person-4-back",
 ]);
