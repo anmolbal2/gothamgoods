@@ -3,6 +3,10 @@ import { stripe } from "@/lib/stripe";
 import { resolveLine, type Size } from "@/lib/catalog";
 import type { PrintifyItem } from "@/lib/printify";
 import { sendEvents } from "@/lib/meta-capi";
+import {
+  sendEvents as ttSendEvents,
+  contentsFromCatalog,
+} from "@/lib/tiktok-eapi";
 
 export const runtime = "nodejs";
 
@@ -28,6 +32,8 @@ export async function POST(request: Request) {
     eventId?: string;
     fbp?: string;
     fbc?: string;
+    ttp?: string;
+    ttclid?: string;
   };
   try {
     body = await request.json();
@@ -43,6 +49,7 @@ export async function POST(request: Request) {
   const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
   const printify_items: PrintifyItem[] = [];
   const contentIds = new Set<string>();
+  const qtyByProduct: Record<string, number> = {};
   let totalCents = 0;
   let totalQty = 0;
 
@@ -60,6 +67,7 @@ export async function POST(request: Request) {
       });
       printify_items.push({ ...item, quantity });
       contentIds.add(productId);
+      qtyByProduct[productId] = (qtyByProduct[productId] ?? 0) + quantity;
       totalCents += priceCents * quantity;
       totalQty += quantity;
     }
@@ -75,6 +83,8 @@ export async function POST(request: Request) {
   const eventId = typeof body.eventId === "string" ? body.eventId : undefined;
   const fbp = typeof body.fbp === "string" ? body.fbp : "";
   const fbc = typeof body.fbc === "string" ? body.fbc : "";
+  const ttp = typeof body.ttp === "string" ? body.ttp : "";
+  const ttclid = typeof body.ttclid === "string" ? body.ttclid : "";
 
   try {
     const session = await stripe.checkout.sessions.create({
@@ -99,6 +109,8 @@ export async function POST(request: Request) {
         meta_fbc: fbc,
         meta_content_ids: JSON.stringify(ids),
         meta_num_items: String(totalQty),
+        tt_ttp: ttp,
+        tt_ttclid: ttclid,
       },
       success_url: `${siteUrl}/thank-you?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/`,
@@ -132,6 +144,34 @@ export async function POST(request: Request) {
         ]);
       } catch (err) {
         console.error("checkout: CAPI InitiateCheckout failed (non-fatal)", err);
+      }
+
+      // Server-side TikTok InitiateCheckout (deduped against the browser event via
+      // eventId). Non-fatal, same as Meta above.
+      try {
+        await ttSendEvents([
+          {
+            event: "InitiateCheckout",
+            event_id: eventId,
+            event_source_url: `${siteUrl}/`,
+            user_data: {
+              ttp: ttp || undefined,
+              ttclid: ttclid || undefined,
+              clientIp:
+                request.headers.get("x-forwarded-for")?.split(",")[0].trim() ||
+                undefined,
+              userAgent: request.headers.get("user-agent") || undefined,
+            },
+            custom_data: {
+              currency: "USD",
+              value: totalCents / 100,
+              contents: contentsFromCatalog(ids, qtyByProduct),
+              content_type: "product",
+            },
+          },
+        ]);
+      } catch (err) {
+        console.error("checkout: TikTok EAPI InitiateCheckout failed (non-fatal)", err);
       }
     }
 

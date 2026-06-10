@@ -1,30 +1,35 @@
 "use client";
 
 /**
- * Client-only Meta Pixel event emitters, rendered from server components.
+ * Client-only Pixel event emitters (Meta + TikTok), rendered from server components.
+ * Each event fires to both vendors with one shared event_id so each can dedup its
+ * own browser/server pair.
  *
  * - PixelPageView: fires PageView on client-side route changes (the *initial*
- *   PageView is fired by the loader snippet in app/layout.tsx, so we skip the
+ *   PageView is fired by the loader snippets in app/layout.tsx, so we skip the
  *   first render here to avoid double-counting).
  * - ViewContent: fires once when a product is shown.
- * - PurchasePixel: fires the browser Purchase on the thank-you page. It shares
- *   its eventId (the Stripe session id) with the authoritative server CAPI
- *   Purchase from the webhook, so Meta dedups the two.
+ * - PurchasePixel: fires the browser purchase (Meta Purchase + TikTok
+ *   CompletePayment) on the thank-you page. It shares its eventId (the Stripe
+ *   session id) with the authoritative server-side purchase from the webhook, so
+ *   both vendors dedup the two.
  */
 
 import { useEffect, useRef } from "react";
 import { usePathname } from "next/navigation";
 import { genEventId, track } from "@/lib/meta-pixel";
+import { track as ttTrack, page as ttPage, buildContents } from "@/lib/tiktok-pixel";
 
 export function PixelPageView() {
   const pathname = usePathname();
   const first = useRef(true);
   useEffect(() => {
     if (first.current) {
-      first.current = false; // initial PageView already fired by the loader snippet
+      first.current = false; // initial PageView already fired by the loader snippets
       return;
     }
     track("PageView", {}, genEventId());
+    ttPage();
   }, [pathname]);
   return null;
 }
@@ -40,6 +45,7 @@ export function ViewContent({
   useEffect(() => {
     if (fired.current) return;
     fired.current = true;
+    const eventId = genEventId();
     track(
       "ViewContent",
       {
@@ -48,7 +54,12 @@ export function ViewContent({
         value: valueCents / 100,
         currency: "USD",
       },
-      genEventId(),
+      eventId,
+    );
+    ttTrack(
+      "ViewContent",
+      { ...buildContents([productId]), value: valueCents / 100 },
+      eventId,
     );
   }, [productId, valueCents]);
   return null;
@@ -75,6 +86,11 @@ export function PurchasePixel({
         value: valueCents / 100,
         currency: "USD",
       },
+      eventId,
+    );
+    ttTrack(
+      "CompletePayment",
+      { ...buildContents(contentIds), value: valueCents / 100 },
       eventId,
     );
   }, [eventId, valueCents, contentIds]);

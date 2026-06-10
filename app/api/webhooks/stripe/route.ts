@@ -4,6 +4,10 @@ import { createOrder, sendToProduction, type PrintifyItem, type Recipient } from
 import { getOrder, recordCreated, markInProduction } from "@/lib/orders-store";
 import { sendOrderConfirmationEmail } from "@/lib/email";
 import { sendEvents } from "@/lib/meta-capi";
+import {
+  sendEvents as ttSendEvents,
+  contentsFromCatalog,
+} from "@/lib/tiktok-eapi";
 
 export const runtime = "nodejs";
 // Printify needs ~15-30s of cost-calculation before send_to_production is
@@ -207,6 +211,41 @@ export async function POST(request: Request) {
       ]);
     } catch (err) {
       console.error("stripe webhook: CAPI Purchase failed (non-fatal)", err);
+    }
+
+    // Authoritative server-side TikTok CompletePayment. Shares its event_id (the
+    // session id) with the browser CompletePayment on the thank-you page so TikTok
+    // dedups them. Non-fatal, same as the Meta block above.
+    try {
+      const md = session.metadata ?? {};
+      let contentIds: string[] = [];
+      try {
+        const parsed = JSON.parse(md.meta_content_ids || "[]");
+        if (Array.isArray(parsed)) contentIds = parsed;
+      } catch {
+        /* ignore malformed metadata */
+      }
+      await ttSendEvents([
+        {
+          event: "CompletePayment",
+          event_id: session.id,
+          event_source_url: `${process.env.SITE_URL ?? ""}/thank-you`,
+          user_data: {
+            email: session.customer_details?.email ?? undefined,
+            phone: session.customer_details?.phone ?? undefined,
+            ttp: md.tt_ttp || undefined,
+            ttclid: md.tt_ttclid || undefined,
+          },
+          custom_data: {
+            currency: "USD",
+            value: (session.amount_total ?? 0) / 100,
+            contents: contentsFromCatalog(contentIds),
+            content_type: "product",
+          },
+        },
+      ]);
+    } catch (err) {
+      console.error("stripe webhook: TikTok EAPI CompletePayment failed (non-fatal)", err);
     }
 
     return new Response("ok", { status: 200 });

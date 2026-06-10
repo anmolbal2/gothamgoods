@@ -10,6 +10,12 @@ import {
 import { CATALOG } from "@/lib/catalog";
 import type { Size } from "@/lib/catalog";
 import { genEventId, track, getFbp, getFbc } from "@/lib/meta-pixel";
+import {
+  track as ttTrack,
+  buildContents,
+  getTtp,
+  getTtclid,
+} from "@/lib/tiktok-pixel";
 
 export interface CartItem {
   productId: string;
@@ -81,8 +87,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
     setError(null);
     setOpen(true);
-    // Meta Pixel: AddToCart (one event per user-initiated add).
+    // Pixels: AddToCart (one event per user-initiated add). One event_id drives both
+    // the Meta and TikTok browser events.
     const priceCents = CATALOG[productId]?.priceCents ?? 0;
+    const atcId = genEventId();
     track(
       "AddToCart",
       {
@@ -91,7 +99,12 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         value: priceCents / 100,
         currency: "USD",
       },
-      genEventId(),
+      atcId,
+    );
+    ttTrack(
+      "AddToCart",
+      { ...buildContents([productId]), value: priceCents / 100 },
+      atcId,
     );
   }, []);
 
@@ -138,8 +151,9 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     if (items.length === 0) return;
     setCheckingOut(true);
     setError(null);
-    // Meta Pixel: InitiateCheckout. The eventId + fbp/fbc go to the server too so the
-    // server-side CAPI InitiateCheckout dedups against this browser event.
+    // Pixels: InitiateCheckout. The eventId + identifiers go to the server too so the
+    // server-side Meta CAPI / TikTok EAPI InitiateCheckout dedup against these browser
+    // events. One event_id drives both vendors.
     const eventId = genEventId();
     const contentIds = [...new Set(items.map((it) => it.productId))];
     track(
@@ -153,11 +167,27 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
       },
       eventId,
     );
+    const qtyById = items.reduce<Record<string, number>>((acc, it) => {
+      acc[it.productId] = (acc[it.productId] ?? 0) + it.qty;
+      return acc;
+    }, {});
+    ttTrack(
+      "InitiateCheckout",
+      { ...buildContents(contentIds, qtyById), value: subtotalCents / 100 },
+      eventId,
+    );
     try {
       const res = await fetch("/api/checkout", {
         method: "POST",
         headers: { "content-type": "application/json" },
-        body: JSON.stringify({ cart: items, eventId, fbp: getFbp(), fbc: getFbc() }),
+        body: JSON.stringify({
+          cart: items,
+          eventId,
+          fbp: getFbp(),
+          fbc: getFbc(),
+          ttp: getTtp(),
+          ttclid: getTtclid(),
+        }),
       });
       if (!res.ok) {
         const data = await res.json().catch(() => ({}));

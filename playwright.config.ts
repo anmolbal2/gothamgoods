@@ -17,6 +17,13 @@ const SERVER_ENV_KEYS = [
   "SUPABASE_URL",
   "SUPABASE_SERVICE_ROLE_KEY",
   "RESEND_API_KEY",
+  // TikTok tracking — test pixel/token + the EAPI base pointed at the mock (:4011)
+  // so the browser Pixel loader renders and all server events hit the mock.
+  "NEXT_PUBLIC_TIKTOK_PIXEL_ID",
+  "TIKTOK_PIXEL_ID",
+  "TIKTOK_EAPI_ACCESS_TOKEN",
+  "TIKTOK_TEST_EVENT_CODE",
+  "TIKTOK_EAPI_BASE",
 ];
 const serverEnv: Record<string, string> = {};
 for (const k of SERVER_ENV_KEYS) serverEnv[k] = process.env[k] ?? "";

@@ -18,6 +18,13 @@ export interface BuildOpts {
   customer?: { name?: string; email?: string; phone?: string };
   /** Replace metadata entirely (e.g. to inject malformed printify_items). */
   metadataOverride?: Record<string, string>;
+  /** Catalog slugs stashed as meta_content_ids (the Pixel/EAPI content_ids). */
+  contentIds?: string[];
+  /** Order total in cents (becomes session.amount_total). */
+  amountTotal?: number;
+  /** TikTok identifiers stashed at checkout time. */
+  ttp?: string;
+  ttclid?: string;
 }
 
 /** Build a fake Stripe `checkout.session.completed` event object. */
@@ -43,8 +50,18 @@ export function buildCheckoutCompleted(opts: BuildOpts = {}) {
   const printifyItems = opts.printifyItems ?? [
     { product_id: "PLACEHOLDER_KNICKS", variant_id: 1002, quantity: 1 },
   ];
+  const contentIds = opts.contentIds ?? ["knicks-in-four"];
+  const amountTotal = opts.amountTotal ?? 3999;
   const metadata =
-    opts.metadataOverride ?? { printify_items: JSON.stringify(printifyItems) };
+    opts.metadataOverride ?? {
+      printify_items: JSON.stringify(printifyItems),
+      meta_content_ids: JSON.stringify(contentIds),
+      meta_num_items: String(
+        printifyItems.reduce((sum, it) => sum + it.quantity, 0),
+      ),
+      tt_ttp: opts.ttp ?? "tt.p.mock",
+      tt_ttclid: opts.ttclid ?? "tt.clid.mock",
+    };
 
   return {
     id: `evt_${Math.random().toString(36).slice(2)}`,
@@ -54,6 +71,7 @@ export function buildCheckoutCompleted(opts: BuildOpts = {}) {
       object: {
         id: sessionId,
         object: "checkout.session",
+        amount_total: amountTotal,
         metadata,
         customer_details: {
           name: customer.name,
