@@ -114,8 +114,13 @@ export interface SaleInfo {
   totalCents: number;
   buyerEmail?: string;
   shipName?: string;
+  shipAddress1?: string;
+  shipAddress2?: string;
   shipCity?: string;
   shipRegion?: string;
+  shipZip?: string;
+  shipCountry?: string;
+  shipPhone?: string;
   printifyOrderId?: string;
 }
 
@@ -127,9 +132,26 @@ export function saleNotificationHtml(s: SaleInfo): string {
         `<tr><td style="padding:4px 0;color:#0b1020">${esc(it.name)}</td><td style="padding:4px 0;text-align:right;color:#0b102099">&times;${it.quantity}</td></tr>`,
     )
     .join("");
-  const shipTo = [s.shipName, [s.shipCity, s.shipRegion].filter(Boolean).join(", ")]
+  // Full shipping address, one element per line.
+  const cityLine = [
+    [s.shipCity, s.shipRegion].filter(Boolean).join(", "),
+    s.shipZip,
+  ]
     .filter(Boolean)
-    .join(" — ");
+    .join(" ");
+  const addressLines = [
+    s.shipName,
+    s.shipAddress1,
+    s.shipAddress2,
+    cityLine || undefined,
+    s.shipCountry,
+  ].filter(Boolean) as string[];
+  const addressBlock = addressLines.length
+    ? `<p style="margin:4px 0;font-size:14px;color:#0b1020"><strong>Ship to:</strong></p>
+       <p style="margin:0 0 4px;font-size:14px;line-height:1.5;color:#0b1020">${addressLines
+         .map(esc)
+         .join("<br>")}</p>`
+    : "";
   const line = (label: string, val?: string) =>
     val ? `<p style="margin:4px 0;font-size:14px;color:#0b1020"><strong>${label}:</strong> ${esc(val)}</p>` : "";
   return `
@@ -140,7 +162,8 @@ export function saleNotificationHtml(s: SaleInfo): string {
     </table>
     ${line("Total", money(s.totalCents))}
     ${line("Buyer", s.buyerEmail)}
-    ${line("Ship to", shipTo || undefined)}
+    ${addressBlock}
+    ${line("Phone", s.shipPhone)}
     ${line("Printify order", s.printifyOrderId)}
     <p style="margin:16px 0 0;font-size:12px;color:#0b102080">Gotham Goods — automated sale alert.</p>
   </div>`;

@@ -173,8 +173,13 @@ export async function POST(request: Request) {
           totalCents,
           buyerEmail,
           shipName: `${recipient.first_name} ${recipient.last_name}`.trim() || undefined,
+          shipAddress1: recipient.address1,
+          shipAddress2: recipient.address2,
           shipCity: recipient.city,
           shipRegion: recipient.region,
+          shipZip: recipient.zip,
+          shipCountry: recipient.country,
+          shipPhone: recipient.phone,
           printifyOrderId,
         });
       } catch (err) {
