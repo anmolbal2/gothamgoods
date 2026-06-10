@@ -71,7 +71,9 @@ const SWATCH = {
 };
 const COLOR_ORDER = ["White", "Black", "Graphite", "Pepper", "Grey", "Granite", "Mystic Blue"];
 const SIZE_ALIAS = { "2XL": "XXL" };
-const SIZE_ORDER = ["S", "M", "L", "XL", "XXL", "3XL", "4XL"];
+// 4XL is intentionally omitted — we don't offer it (it left the size grid with a
+// lone button on its own row). Variants for it are dropped in buildColors below.
+const SIZE_ORDER = ["S", "M", "L", "XL", "XXL", "3XL"];
 
 async function getProduct(id) {
   const r = await fetch(`https://api.printify.com/v1/shops/${SHOP}/products/${id}.json`, {
@@ -112,6 +114,7 @@ function buildColors(p, views = DEFAULT_VIEWS) {
   for (const v of enabled) {
     const [color, rawSize] = (v.title || "").split(" / ");
     const size = SIZE_ALIAS[rawSize] || rawSize;
+    if (!SIZE_ORDER.includes(size)) continue; // skip sizes we don't offer (e.g. 4XL)
     (byColor[color] ??= {})[size] = v.id;
   }
   const colors = [];

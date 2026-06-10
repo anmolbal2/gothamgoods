@@ -3,8 +3,8 @@
 //
 // SINGLE SOURCE OF TRUTH: products -> colors -> sizes -> Printify variant ids.
 
-export type Size = "S" | "M" | "L" | "XL" | "XXL" | "3XL" | "4XL";
-export const SIZE_ORDER: Size[] = ["S","M","L","XL","XXL","3XL","4XL"];
+export type Size = "S" | "M" | "L" | "XL" | "XXL" | "3XL";
+export const SIZE_ORDER: Size[] = ["S","M","L","XL","XXL","3XL"];
 
 export interface ColorVariant {
   name: string;
@@ -47,8 +47,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 73203,
           "XL": 73211,
           "L": 73207,
-          "XXL": 73215,
-          "4XL": 101476
+          "XXL": 73215
         }
       },
       {
@@ -67,8 +66,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73208,
           "M": 73200,
           "S": 73196,
-          "XXL": 73212,
-          "4XL": 101423
+          "XXL": 73212
         }
       },
       {
@@ -87,8 +85,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 78964,
           "S": 78961,
           "L": 78963,
-          "XXL": 78965,
-          "4XL": 101443
+          "XXL": 78965
         }
       },
       {
@@ -107,8 +104,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 78972,
           "XL": 78974,
           "S": 78971,
-          "XXL": 78975,
-          "4XL": 101445
+          "XXL": 78975
         }
       },
       {
@@ -127,8 +123,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73989,
           "S": 73968,
           "M": 73975,
-          "XXL": 73996,
-          "4XL": 101441
+          "XXL": 73996
         }
       },
       {
@@ -147,8 +142,7 @@ export const CATALOG: Record<string, Product> = {
           "S": 79031,
           "XL": 79034,
           "M": 79032,
-          "XXL": 79035,
-          "4XL": 101459
+          "XXL": 79035
         }
       }
     ]
@@ -176,8 +170,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 73203,
           "XL": 73211,
           "L": 73207,
-          "XXL": 73215,
-          "4XL": 101476
+          "XXL": 73215
         }
       },
       {
@@ -196,8 +189,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73208,
           "M": 73200,
           "S": 73196,
-          "XXL": 73212,
-          "4XL": 101423
+          "XXL": 73212
         }
       },
       {
@@ -216,8 +208,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 78964,
           "S": 78961,
           "L": 78963,
-          "XXL": 78965,
-          "4XL": 101443
+          "XXL": 78965
         }
       },
       {
@@ -236,8 +227,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 78972,
           "XL": 78974,
           "S": 78971,
-          "XXL": 78975,
-          "4XL": 101445
+          "XXL": 78975
         }
       },
       {
@@ -256,8 +246,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73989,
           "S": 73968,
           "M": 73975,
-          "XXL": 73996,
-          "4XL": 101441
+          "XXL": 73996
         }
       },
       {
@@ -276,8 +265,7 @@ export const CATALOG: Record<string, Product> = {
           "S": 79031,
           "XL": 79034,
           "M": 79032,
-          "XXL": 79035,
-          "4XL": 101459
+          "XXL": 79035
         }
       }
     ]
@@ -305,8 +293,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 73203,
           "XL": 73211,
           "L": 73207,
-          "XXL": 73215,
-          "4XL": 101476
+          "XXL": 73215
         }
       },
       {
@@ -325,8 +312,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73208,
           "M": 73200,
           "S": 73196,
-          "XXL": 73212,
-          "4XL": 101423
+          "XXL": 73212
         }
       },
       {
@@ -345,8 +331,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 78964,
           "S": 78961,
           "L": 78963,
-          "XXL": 78965,
-          "4XL": 101443
+          "XXL": 78965
         }
       },
       {
@@ -365,8 +350,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 78972,
           "XL": 78974,
           "S": 78971,
-          "XXL": 78975,
-          "4XL": 101445
+          "XXL": 78975
         }
       },
       {
@@ -385,8 +369,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73989,
           "S": 73968,
           "M": 73975,
-          "XXL": 73996,
-          "4XL": 101441
+          "XXL": 73996
         }
       },
       {
@@ -405,8 +388,7 @@ export const CATALOG: Record<string, Product> = {
           "S": 79031,
           "XL": 79034,
           "M": 79032,
-          "XXL": 79035,
-          "4XL": 101459
+          "XXL": 79035
         }
       }
     ]
@@ -434,8 +416,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 73203,
           "XL": 73211,
           "L": 73207,
-          "XXL": 73215,
-          "4XL": 101476
+          "XXL": 73215
         }
       },
       {
@@ -454,8 +435,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 79049,
           "S": 79046,
           "M": 79047,
-          "XXL": 79050,
-          "4XL": 101463
+          "XXL": 79050
         }
       },
       {
@@ -474,8 +454,7 @@ export const CATALOG: Record<string, Product> = {
           "M": 78972,
           "XL": 78974,
           "S": 78971,
-          "XXL": 78975,
-          "4XL": 101445
+          "XXL": 78975
         }
       },
       {
@@ -494,8 +473,7 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73989,
           "S": 73968,
           "M": 73975,
-          "XXL": 73996,
-          "4XL": 101441
+          "XXL": 73996
         }
       },
       {
@@ -514,8 +492,7 @@ export const CATALOG: Record<string, Product> = {
           "S": 79031,
           "XL": 79034,
           "M": 79032,
-          "XXL": 79035,
-          "4XL": 101459
+          "XXL": 79035
         }
       }
     ]
