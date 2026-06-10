@@ -7,6 +7,7 @@ import { buildTickerItems } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
 import { CartProvider, CartButton, CartDrawer } from "@/app/components/cart";
 import { PixelPageView } from "@/app/components/PixelEvents";
+import { Analytics } from "@vercel/analytics/next";
 
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
@@ -127,6 +128,7 @@ fbq('init','${META_PIXEL_ID}');fbq('track','PageView');`}
 
           <CartDrawer />
         </CartProvider>
+        <Analytics />
       </body>
     </html>
   );
