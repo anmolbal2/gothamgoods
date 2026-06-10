@@ -1,0 +1,23 @@
+name: Optimize Meta ads
+
+# Self-improvement loop for the live Meta ad set: pauses sub-ROAS / no-conversion
+# ads, scales budget toward the daily cap on winners, and spins up a fresh
+# scarcity/urgency creative. Runs every 6 hours (Vercel Hobby cron is capped at
+# once/day, so GitHub Actions drives the frequent cadence). Full-auto, idempotent,
+# secured by CRON_SECRET. The endpoint never throws — it returns a JSON summary.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+jobs:
+  optimize:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Hit ads-optimize endpoint
+        run: |
+          code=$(curl -sS -o /tmp/out.json -w "%{http_code}" \
+            -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+            "https://gothamgoods.vercel.app/api/cron/ads-optimize")
+          echo "HTTP $code"; cat /tmp/out.json; echo
+          test "$code" = "200"
