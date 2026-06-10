@@ -86,6 +86,7 @@ export async function GET(request: Request) {
     paused: [] as string[],
     scaled: null as { from: number; to: number; roas: number } | null,
     newAds: [] as string[],
+    refresh: "" as string,
     errors: [] as string[],
   };
 
@@ -128,24 +129,38 @@ export async function GET(request: Request) {
   // 3) creative refresh — one fresh scarcity/urgency ad per run
   try {
     const products = listProducts();
-    if (products.length) {
+    if (!products.length) {
+      result.refresh = "skipped: no products";
+    } else {
       const p = products[Math.floor(Math.random() * products.length)];
       const img = p.colors[0]?.image || p.colors[0]?.images?.[0];
       const copy = await generateScarcityCopy(p.name, p.blurb || "");
-      if (img && copy) {
+      if (!img) {
+        result.refresh = `skipped: ${p.id} has no image`;
+      } else if (!copy) {
+        result.refresh = "skipped: copy generation returned null (check ANTHROPIC_API_KEY)";
+      } else {
         const hash = await uploadImage(img);
-        if (hash) {
+        if (!hash) {
+          result.refresh = "failed: image upload returned no hash";
+        } else {
           const adId = await createAdWithCopy({
             name: `${p.id}-${Date.now()}`,
             message: copy.message,
             headline: copy.headline,
             imageHash: hash,
           });
-          if (adId) result.newAds.push(adId);
+          if (adId) {
+            result.newAds.push(adId);
+            result.refresh = `created ad ${adId} for ${p.id}`;
+          } else {
+            result.refresh = "failed: ad creation returned no id";
+          }
         }
       }
     }
   } catch (e) {
+    result.refresh = "error";
     result.errors.push(`refresh: ${e instanceof Error ? e.message : e}`);
   }
 
