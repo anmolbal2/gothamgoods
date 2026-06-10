@@ -8,7 +8,7 @@
  * attribution lines up.
  */
 
-import { listProducts } from "@/lib/catalog";
+import { listProducts, type Product } from "@/lib/catalog";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,6 +22,30 @@ function esc(s: string): string {
     .replace(/'/g, "&apos;");
 }
 
+/** Guardrail: blank-back mockups (camera_label *back* / camera id 98446) must never hit the feed. */
+function isBackImage(url: string): boolean {
+  return /camera_label=[^&"']*back/i.test(url) || url.includes("/98446/");
+}
+
+/**
+ * First non-back front image. Prefers the Black colorway (White tees render
+ * white-on-white in ad placements), then any non-White color, then colors[0].
+ */
+function pickFeedImage(p: Product): string {
+  const candidates = [
+    p.colors.find((c) => c.name === "Black"),
+    p.colors.find((c) => c.name !== "White"),
+    p.colors[0],
+  ];
+  for (const c of candidates) {
+    if (!c) continue;
+    for (const url of [c.image, ...(c.images || [])]) {
+      if (url && !isBackImage(url)) return url;
+    }
+  }
+  return "";
+}
+
 export async function GET(): Promise<Response> {
   const site = (process.env.SITE_URL || "https://gothamgoods.vercel.app").replace(
     /\/$/,
@@ -30,7 +54,7 @@ export async function GET(): Promise<Response> {
 
   const items = listProducts()
     .map((p) => {
-      const image = p.colors[0]?.image ?? "";
+      const image = pickFeedImage(p);
       const price = (p.priceCents / 100).toFixed(2);
       const description = p.blurb ?? p.name;
       return `    <item>

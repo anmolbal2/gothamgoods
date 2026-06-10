@@ -9,7 +9,7 @@ export const SIZE_ORDER: Size[] = ["S","M","L","XL","XXL","3XL"];
 export interface ColorVariant {
   name: string;
   swatch: string; // hex for the picker
-  images: string[]; // ordered mockups: front, on-person, lifestyle, back
+  images: string[]; // ordered mockups: front, on-person, lifestyle — back views excluded (blank shirts)
   image?: string; // legacy first image (hero/feed compat) = images[0]
   variants: Partial<Record<Size, number>>; // size -> Printify variant id
 }

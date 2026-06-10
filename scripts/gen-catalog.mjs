@@ -104,14 +104,10 @@ const DEFAULT_VIEWS = [
   "person-4-context",
   "person-5-context",
 ];
-const EXCLUDE = new Set([
-  "size-chart",
-  "back",
-  "person-1-back",
-  "person-2-back",
-  "person-3-back",
-  "person-4-back",
-]);
+// NO BACK VIEWS: the "back" mockups (camera_label *back*, camera id 98446) are
+// blank shirts and must never appear on any site/feed/creative surface.
+// isBackImage() below is the single source of truth for that exclusion.
+const EXCLUDE = new Set(["size-chart"]);
 
 function cameraLabel(src) {
   try {
@@ -119,6 +115,11 @@ function cameraLabel(src) {
   } catch {
     return "";
   }
+}
+
+/** Blank-back guardrail: any back-ish camera label or the 98446 camera id. */
+function isBackImage(label, src) {
+  return String(label).toLowerCase().includes("back") || String(src).includes("/98446/");
 }
 
 function buildColors(p, views = DEFAULT_VIEWS) {
@@ -141,15 +142,16 @@ function buildColors(p, views = DEFAULT_VIEWS) {
     for (const im of p.images || []) {
       if (!(im.variant_ids || []).some((id) => ids.has(id))) continue;
       const label = cameraLabel(im.src);
-      if (EXCLUDE.has(label)) continue;
+      if (EXCLUDE.has(label) || isBackImage(label, im.src)) continue;
       if (!(label in byLabel)) byLabel[label] = im.src;
     }
 
     // This product's views (in order); fall back to any remaining if fewer than 2.
+    // The fallback must never promote a back view (blank shirt) into images[].
     let images = views.filter((l) => byLabel[l]).map((l) => byLabel[l]);
     if (images.length < 2) {
       const rest = Object.entries(byLabel)
-        .filter(([l]) => !views.includes(l))
+        .filter(([l, src]) => !views.includes(l) && !isBackImage(l, src))
         .map(([, src]) => src);
       images = [...images, ...rest];
     }
@@ -197,7 +199,7 @@ export const SIZE_ORDER: Size[] = ${JSON.stringify(SIZE_ORDER)};
 export interface ColorVariant {
   name: string;
   swatch: string; // hex for the picker
-  images: string[]; // ordered mockups: front, on-person, lifestyle, back
+  images: string[]; // ordered mockups: front, on-person, lifestyle — back views excluded (blank shirts)
   image?: string; // legacy first image (hero/feed compat) = images[0]
   variants: Partial<Record<Size, number>>; // size -> Printify variant id
 }

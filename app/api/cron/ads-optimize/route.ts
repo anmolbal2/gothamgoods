@@ -7,7 +7,7 @@ import {
   uploadImage,
   createAdWithCopy,
 } from "@/lib/meta-marketing";
-import { listProducts } from "@/lib/catalog";
+import { listProducts, type Product } from "@/lib/catalog";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -22,6 +22,30 @@ export const dynamic = "force-dynamic";
 function envNum(key: string, fallback: number): number {
   const v = parseFloat(process.env[key] || "");
   return Number.isFinite(v) ? v : fallback;
+}
+
+/** Guardrail: blank-back mockups (camera_label *back* / camera id 98446) must never run as ads. */
+function isBackImage(url: string): boolean {
+  return /camera_label=[^&"']*back/i.test(url) || url.includes("/98446/");
+}
+
+/**
+ * First non-back image for ad creative. Prefers the Black colorway (White tees
+ * render white-on-white in ads), then any non-White color, then colors[0].
+ */
+function pickAdImage(p: Product): string | undefined {
+  const candidates = [
+    p.colors.find((c) => c.name === "Black"),
+    p.colors.find((c) => c.name !== "White"),
+    p.colors[0],
+  ];
+  for (const c of candidates) {
+    if (!c) continue;
+    for (const url of [c.image, ...(c.images || [])]) {
+      if (url && !isBackImage(url)) return url;
+    }
+  }
+  return undefined;
 }
 
 /** Generate one fresh scarcity/urgency ad copy via the Claude API. */
@@ -133,7 +157,7 @@ export async function GET(request: Request) {
       result.refresh = "skipped: no products";
     } else {
       const p = products[Math.floor(Math.random() * products.length)];
-      const img = p.colors[0]?.image || p.colors[0]?.images?.[0];
+      const img = pickAdImage(p);
       const copy = await generateScarcityCopy(p.name, p.blurb || "");
       if (!img) {
         result.refresh = `skipped: ${p.id} has no image`;
