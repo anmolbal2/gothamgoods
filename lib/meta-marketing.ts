@@ -136,12 +136,13 @@ export async function createAdWithCopy(args: {
       },
     }),
   })) as { id?: string };
-  if (!creative.id) return null;
+  if (!creative.id) throw new Error(`adcreative returned no id: ${JSON.stringify(creative)}`);
   const ad = (await postForm(`${adAccount()}/ads`, {
     name: `auto-${args.name}`,
     adset_id: adSetId(),
     creative: JSON.stringify({ creative_id: creative.id }),
     status: "ACTIVE",
   })) as { id?: string };
-  return ad.id || null;
+  if (!ad.id) throw new Error(`ad returned no id: ${JSON.stringify(ad)}`);
+  return ad.id;
 }

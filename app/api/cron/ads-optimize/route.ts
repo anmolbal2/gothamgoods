@@ -142,7 +142,7 @@ export async function GET(request: Request) {
       } else {
         const hash = await uploadImage(img);
         if (!hash) {
-          result.refresh = "failed: image upload returned no hash";
+          result.refresh = `failed: image upload returned no hash (img ${img})`;
         } else {
           const adId = await createAdWithCopy({
             name: `${p.id}-${Date.now()}`,
