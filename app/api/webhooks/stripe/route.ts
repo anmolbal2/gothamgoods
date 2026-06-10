@@ -2,7 +2,7 @@ import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { createOrder, sendToProduction, type PrintifyItem, type Recipient } from "@/lib/printify";
 import { getOrder, recordCreated, markInProduction } from "@/lib/orders-store";
-import { sendOrderConfirmationEmail } from "@/lib/email";
+import { sendOrderConfirmationEmail, sendSaleNotification } from "@/lib/email";
 import { sendEvents } from "@/lib/meta-capi";
 import {
   sendEvents as ttSendEvents,
@@ -145,10 +145,10 @@ export async function POST(request: Request) {
     await sendToProduction(printifyOrderId);
     await markInProduction(session.id);
 
-    // Order-confirmation receipt. Non-fatal: a send failure must never 500 the
-    // webhook (which would re-run fulfillment). Human-readable line-item names
-    // aren't in the event, so retrieve them like the /thank-you page does. In
-    // offline tests this retrieve throws on the fake session id and is skipped.
+    // Post-order emails. Non-fatal: a send failure must never 500 the webhook
+    // (which would re-run fulfillment). Human-readable line-item names aren't in
+    // the event, so retrieve them like the /thank-you page does. In offline tests
+    // this retrieve throws on the fake session id and the whole block is skipped.
     try {
       const full = await stripe.checkout.sessions.retrieve(session.id, {
         expand: ["line_items"],
@@ -157,13 +157,31 @@ export async function POST(request: Request) {
         name: li.description ?? "Item",
         quantity: li.quantity ?? 1,
       }));
-      await sendOrderConfirmationEmail({
-        to: full.customer_details?.email ?? recipient.email,
-        items,
-        totalCents: full.amount_total ?? session.amount_total ?? 0,
-      });
+      const totalCents = full.amount_total ?? session.amount_total ?? 0;
+      const buyerEmail = full.customer_details?.email ?? recipient.email;
+
+      // Customer receipt.
+      try {
+        await sendOrderConfirmationEmail({ to: buyerEmail, items, totalCents });
+      } catch (err) {
+        console.error("stripe webhook: confirmation email failed (non-fatal)", err);
+      }
+      // Internal sale alert (always to the owner, every sale).
+      try {
+        await sendSaleNotification({
+          items,
+          totalCents,
+          buyerEmail,
+          shipName: `${recipient.first_name} ${recipient.last_name}`.trim() || undefined,
+          shipCity: recipient.city,
+          shipRegion: recipient.region,
+          printifyOrderId,
+        });
+      } catch (err) {
+        console.error("stripe webhook: sale alert failed (non-fatal)", err);
+      }
     } catch (err) {
-      console.error("stripe webhook: confirmation email failed (non-fatal)", err);
+      console.error("stripe webhook: post-order emails skipped (non-fatal)", err);
     }
 
     // Authoritative server-side Purchase for Meta — fired AFTER markInProduction so

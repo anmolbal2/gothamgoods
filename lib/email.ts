@@ -16,6 +16,9 @@ export interface ReceiptItem {
 
 const SITE = "https://gotham-goods.com";
 
+// Internal "you made a sale" notifications always go here, regardless of buyer.
+const SALES_NOTIFY_TO = "anmolbal@berkeley.edu";
+
 function money(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
@@ -103,5 +106,65 @@ export async function sendOrderConfirmationEmail({
     to,
     subject: "You're in 🏀 — your Gotham Goods order",
     html: orderConfirmationHtml({ items, totalCents }),
+  });
+}
+
+export interface SaleInfo {
+  items: ReceiptItem[];
+  totalCents: number;
+  buyerEmail?: string;
+  shipName?: string;
+  shipCity?: string;
+  shipRegion?: string;
+  printifyOrderId?: string;
+}
+
+/** Plain, scannable internal notification of a new sale (for the owner). */
+export function saleNotificationHtml(s: SaleInfo): string {
+  const rows = s.items
+    .map(
+      (it) =>
+        `<tr><td style="padding:4px 0;color:#0b1020">${esc(it.name)}</td><td style="padding:4px 0;text-align:right;color:#0b102099">&times;${it.quantity}</td></tr>`,
+    )
+    .join("");
+  const shipTo = [s.shipName, [s.shipCity, s.shipRegion].filter(Boolean).join(", ")]
+    .filter(Boolean)
+    .join(" — ");
+  const line = (label: string, val?: string) =>
+    val ? `<p style="margin:4px 0;font-size:14px;color:#0b1020"><strong>${label}:</strong> ${esc(val)}</p>` : "";
+  return `
+  <div style="font-family:Arial,Helvetica,sans-serif;max-width:520px;margin:0 auto;color:#0b1020">
+    <h1 style="font-size:22px;margin:0 0 4px">🛒 New sale — ${money(s.totalCents)}</h1>
+    <table style="width:100%;border-collapse:collapse;margin:12px 0;border-top:1px solid #e3dcc9;border-bottom:1px solid #e3dcc9">
+      <tbody>${rows}</tbody>
+    </table>
+    ${line("Total", money(s.totalCents))}
+    ${line("Buyer", s.buyerEmail)}
+    ${line("Ship to", shipTo || undefined)}
+    ${line("Printify order", s.printifyOrderId)}
+    <p style="margin:16px 0 0;font-size:12px;color:#0b102080">Gotham Goods — automated sale alert.</p>
+  </div>`;
+}
+
+/**
+ * Internal sale alert to the owner (SALES_NOTIFY_TO) on every order. Best-effort:
+ * no-op (logs) when Resend isn't configured; throws on a Resend API error so the
+ * caller can log it non-fatally.
+ */
+export async function sendSaleNotification(s: SaleInfo): Promise<void> {
+  if (!process.env.RESEND_API_KEY) {
+    console.log("email: RESEND not configured; would send sale alert", {
+      totalCents: s.totalCents,
+    });
+    return;
+  }
+  const first = s.items[0]?.name ?? "order";
+  const extra = s.items.length > 1 ? ` +${s.items.length - 1} more` : "";
+  const resend = new Resend(process.env.RESEND_API_KEY);
+  await resend.emails.send({
+    from: process.env.EMAIL_FROM || "Gotham Goods <onboarding@resend.dev>",
+    to: SALES_NOTIFY_TO,
+    subject: `🛒 New sale — ${money(s.totalCents)} — ${first}${extra}`,
+    html: saleNotificationHtml(s),
   });
 }
