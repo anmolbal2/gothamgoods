@@ -8,17 +8,27 @@ import { ViewContent } from "@/app/components/PixelEvents";
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
 
+// The "Trump killed the vibes" Knicks-in-5 tee is the headliner.
 const HERO_LINES = [
   "MY MAYOR MUSLIM",
-  "MY BAGEL JEWISH",
-  "MY CHRISTIAN DIOR",
-  "KNICKS IN FOUR",
+  "MY BAGELS JEWISH",
+  "TRUMP KILLED THE VIBES",
+  "KNICKS IN 5",
 ];
 
+// Product keys that belong to the dedicated "Knicks in 5" section.
+const KNICKS5 = ["knicks-in-five", "cream-cheese-chive"];
+
 export default async function Home() {
-  const products = listProducts();
+  const all = listProducts();
   const series = await getSeriesState();
-  const hero = products[0];
+
+  const byId = Object.fromEntries(all.map((p) => [p.id, p]));
+  const knicks5 = KNICKS5.map((k) => byId[k]).filter(Boolean);
+  const rest = all.filter((p) => !KNICKS5.includes(p.id));
+
+  // Headliner = the "Trump killed the vibes" tee (falls back to first product).
+  const hero = byId["knicks-in-five"] ?? all[0];
   const heroImage = hero?.colors[0]?.image;
 
   return (
@@ -48,7 +58,7 @@ export default async function Home() {
               </h1>
               <p className="mt-6 max-w-md text-lg text-white/75">
                 Officially unofficial New York fan merch. New drop every day of the run
-                — heavyweight Comfort Colors tees, free shipping from New Jersey.
+                — free shipping from New Jersey.
               </p>
               <a
                 href="#shop"
@@ -62,7 +72,7 @@ export default async function Home() {
               {heroImage ? (
                 <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white p-3 shadow-xl">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={heroImage} alt="Gotham Goods tee" className="w-full" />
+                  <img src={heroImage} alt={hero.name} className="w-full" />
                 </div>
               ) : null}
             </div>
@@ -73,25 +83,45 @@ export default async function Home() {
       {/* LIVE FINALS TRACKER */}
       <FinalsTracker state={series} />
 
-      {/* THE DROP */}
-      <section id="shop" className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16">
-        <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
-          <h2 className="font-display text-4xl uppercase tracking-tight">The Drop</h2>
-          <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-            {products.length} styles · new drop every day
+      {/* KNICKS IN 5 — the headlining collection */}
+      {knicks5.length > 0 ? (
+        <section id="shop" className="mx-auto max-w-6xl scroll-mt-24 px-5 pt-16">
+          <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
+            <h2 className="font-display text-4xl uppercase tracking-tight">Knicks in 5</h2>
+            <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
+              The headliner · new drop every day
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {knicks5.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+        </section>
+      ) : null}
+
+      {/* THE REST OF THE DROP */}
+      {rest.length > 0 ? (
+        <section className="mx-auto max-w-6xl scroll-mt-24 px-5 py-16">
+          <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
+            <h2 className="font-display text-4xl uppercase tracking-tight">The Drop</h2>
+            <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
+              {rest.length} more styles
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {rest.map((p) => (
+              <ProductCard key={p.id} product={p} />
+            ))}
+          </div>
+
+          <p className="mt-8 text-center font-mono text-xs uppercase tracking-widest text-ink/40">
+            New design drops every day of the finals run — check back daily.
           </p>
-        </div>
-
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          {products.map((p) => (
-            <ProductCard key={p.id} product={p} />
-          ))}
-        </div>
-
-        <p className="mt-8 text-center font-mono text-xs uppercase tracking-widest text-ink/40">
-          New design drops every day of the finals run — check back daily.
-        </p>
-      </section>
+        </section>
+      ) : null}
     </>
   );
 }
