@@ -29,15 +29,27 @@ const PRODUCTS = [
     blurb:
       "The whole city is saying it, so we put it on a shirt. Heavyweight Comfort Colors cotton, shipped from New Jersey.",
     views: ["front", "person-1-front", "person-3-front", "person-3-context"],
+    defaultColor: "Black",
   },
   {
-    id: "6a29dc8467f98a3d3e0345e0",
+    id: "6a29fb43b68139813c06d632",
     key: "knicks-in-five",
     name: "Knicks in Five Tee",
     tagline: "TRUMP KILLED THE VIBES",
     blurb:
       "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     views: ["front", "person-1-front", "person-2-front", "lifestyle"],
+    defaultColor: "Orange",
+  },
+  {
+    id: "6a29fcb2fe6ec8a6d110b144",
+    key: "cream-cheese-chive",
+    name: "Cream Cheese Chive Tee",
+    tagline: "MY CREAM CHEESE CHIVE",
+    blurb:
+      "My Mayor Muslim, my bagels Jewish, my cream cheese chive — the full New York order, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    views: ["front", "person-1-front", "person-2-front", "lifestyle"],
+    defaultColor: "Royal",
   },
   {
     id: "6a27c36891cf9037720216b7",
@@ -47,6 +59,7 @@ const PRODUCTS = [
     blurb:
       "Everyone's better than Jalen Brunson — until it's time to be better than Jalen Brunson. For the doubters and the believers.",
     views: ["front", "person-2", "person-4-front", "person-4-context"],
+    defaultColor: "White",
   },
   {
     id: "6a27c372cf9078f4a3052270",
@@ -56,6 +69,7 @@ const PRODUCTS = [
     blurb:
       "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
     views: ["front", "person-5-context", "person-5-context-2", "folded"],
+    defaultColor: "Granite",
   },
   {
     id: "6a27dd8575aae553c70ecf64",
@@ -65,6 +79,7 @@ const PRODUCTS = [
     blurb:
       "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
     views: ["front", "person-1-front", "person-2", "person-5-context"],
+    defaultColor: "Mystic Blue",
   },
 ];
 
@@ -74,6 +89,7 @@ const SWATCH = {
   Black: "#1c1c1c",
   Royal: "#1c4d92",
   Orange: "#e3592a",
+  Charcoal: "#565459",
   Graphite: "#4f5356",
   Pepper: "#575450",
   "Ice Grey": "#cfcecc",
@@ -81,7 +97,7 @@ const SWATCH = {
   Granite: "#9b9a94",
   "Mystic Blue": "#5f7e93",
 };
-const COLOR_ORDER = ["White", "Black", "Royal", "Orange", "Graphite", "Pepper", "Ice Grey", "Grey", "Granite", "Mystic Blue"];
+const COLOR_ORDER = ["White", "Black", "Royal", "Orange", "Charcoal", "Graphite", "Pepper", "Ice Grey", "Grey", "Granite", "Mystic Blue"];
 const SIZE_ALIAS = { "2XL": "XXL" };
 // 4XL is intentionally omitted — we don't offer it (it left the size grid with a
 // lone button on its own row). Variants for it are dropped in buildColors below.
@@ -122,7 +138,7 @@ function isBackImage(label, src) {
   return String(label).toLowerCase().includes("back") || String(src).includes("/98446/");
 }
 
-function buildColors(p, views = DEFAULT_VIEWS) {
+function buildColors(p, views = DEFAULT_VIEWS, defaultColor) {
   const enabled = (p.variants || []).filter((v) => v.is_enabled);
   const byColor = {};
   for (const v of enabled) {
@@ -165,6 +181,12 @@ function buildColors(p, views = DEFAULT_VIEWS) {
       variants,
     });
   }
+  // Default colorway shown on the card/hero = colors[0]. Move the chosen default to
+  // the front so the storefront rotates colors (variety across the grid).
+  if (defaultColor) {
+    const i = colors.findIndex((c) => c.name === defaultColor);
+    if (i > 0) colors.unshift(colors.splice(i, 1)[0]);
+  }
   return colors;
 }
 
@@ -177,7 +199,7 @@ for (const meta of PRODUCTS) {
     tagline: meta.tagline,
     blurb: meta.blurb,
     printifyProductId: meta.id,
-    colors: buildColors(p, meta.views),
+    colors: buildColors(p, meta.views, meta.defaultColor),
   };
   const totalVariants = catalog[meta.key].colors.reduce(
     (n, c) => n + Object.keys(c.variants).length,

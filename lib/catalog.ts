@@ -32,25 +32,6 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a27897a8f2246d09f0acb65",
     "colors": [
       {
-        "name": "White",
-        "swatch": "#efece2",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
-          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100674/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-context"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79169,
-          "S": 73199,
-          "M": 73203,
-          "XL": 73211,
-          "L": 73207,
-          "XXL": 73215
-        }
-      },
-      {
         "name": "Black",
         "swatch": "#1c1c1c",
         "images": [
@@ -67,6 +48,25 @@ export const CATALOG: Record<string, Product> = {
           "M": 73200,
           "S": 73196,
           "XXL": 73212
+        }
+      },
+      {
+        "name": "White",
+        "swatch": "#efece2",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/112433/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100630/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-front",
+          "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/100674/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-3-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27897a8f2246d09f0acb65/73207/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79169,
+          "S": 73199,
+          "M": 73203,
+          "XL": 73211,
+          "L": 73207,
+          "XXL": 73215
         }
       },
       {
@@ -152,101 +152,243 @@ export const CATALOG: Record<string, Product> = {
     "priceCents": 3999,
     "tagline": "TRUMP KILLED THE VIBES",
     "blurb": "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
-    "printifyProductId": "6a29dc8467f98a3d3e0345e0",
+    "printifyProductId": "6a29fb43b68139813c06d632",
     "colors": [
+      {
+        "name": "Orange",
+        "swatch": "#e3592a",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+        "variants": {
+          "S": 42796,
+          "M": 42799,
+          "L": 42802,
+          "XL": 42805,
+          "3XL": 42811,
+          "XXL": 42808
+        }
+      },
       {
         "name": "White",
         "swatch": "#efece2",
         "images": [
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38191/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38191/100616/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38191/100619/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38191/127673/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=lifestyle"
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38191/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38191/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38191/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38191/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
         ],
-        "image": "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38191/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38191/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
         "variants": {
-          "S": 38163,
-          "M": 38177,
           "L": 38191,
           "XL": 38205,
-          "XXL": 38219,
-          "3XL": 42120
+          "S": 38163,
+          "M": 38177,
+          "3XL": 42120,
+          "XXL": 38219
         }
       },
       {
         "name": "Black",
         "swatch": "#1c1c1c",
         "images": [
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38192/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38192/100616/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38192/100619/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38192/127673/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=lifestyle"
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38192/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38192/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38192/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38192/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
         ],
-        "image": "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38192/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38192/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
         "variants": {
-          "S": 38164,
-          "M": 38178,
-          "L": 38192,
           "XL": 38206,
-          "XXL": 38220,
-          "3XL": 42122
+          "L": 38192,
+          "M": 38178,
+          "S": 38164,
+          "3XL": 42122,
+          "XXL": 38220
         }
       },
       {
         "name": "Royal",
         "swatch": "#1c4d92",
         "images": [
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38189/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38189/100616/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38189/100619/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38189/127673/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=lifestyle"
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38189/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38189/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38189/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38189/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
         ],
-        "image": "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/38189/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38189/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
         "variants": {
           "S": 38161,
-          "M": 38175,
-          "L": 38189,
           "XL": 38203,
-          "XXL": 38217,
-          "3XL": 42118
+          "L": 38189,
+          "M": 38175,
+          "3XL": 42118,
+          "XXL": 38217
         }
       },
       {
-        "name": "Orange",
-        "swatch": "#e3592a",
+        "name": "Charcoal",
+        "swatch": "#565459",
         "images": [
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/42802/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/42802/100616/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/42802/100619/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/42802/127673/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=lifestyle"
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38181/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38181/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38181/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38181/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
         ],
-        "image": "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/42802/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/38181/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
         "variants": {
-          "S": 42796,
-          "M": 42799,
-          "L": 42802,
-          "XL": 42805,
-          "XXL": 42808,
-          "3XL": 42811
+          "S": 38153,
+          "M": 38167,
+          "XL": 38195,
+          "L": 38181,
+          "3XL": 42109,
+          "XXL": 38209
         }
       },
       {
         "name": "Ice Grey",
         "swatch": "#cfcecc",
         "images": [
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/66243/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/66243/100616/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/66243/100619/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/66243/127673/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=lifestyle"
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/66243/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/66243/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/66243/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/66243/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
         ],
-        "image": "https://images-api.printify.com/mockup/6a29dc8467f98a3d3e0345e0/66243/97992/my-mayor-muslim-trump-killed-the-vibes-knicks-in-5-tee.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/66243/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
         "variants": {
+          "XL": 66244,
+          "L": 66243,
           "S": 66241,
           "M": 66242,
-          "L": 66243,
+          "3XL": 66246,
+          "XXL": 66245
+        }
+      }
+    ]
+  },
+  "cream-cheese-chive": {
+    "name": "Cream Cheese Chive Tee",
+    "priceCents": 3999,
+    "tagline": "MY CREAM CHEESE CHIVE",
+    "blurb": "My Mayor Muslim, my bagels Jewish, my cream cheese chive — the full New York order, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    "printifyProductId": "6a29fcb2fe6ec8a6d110b144",
+    "colors": [
+      {
+        "name": "Royal",
+        "swatch": "#1c4d92",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38189/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38189/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38189/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38189/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38189/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "S": 38161,
+          "XL": 38203,
+          "L": 38189,
+          "M": 38175,
+          "3XL": 42118,
+          "XXL": 38217
+        }
+      },
+      {
+        "name": "White",
+        "swatch": "#efece2",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38191/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38191/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38191/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38191/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38191/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "L": 38191,
+          "XL": 38205,
+          "S": 38163,
+          "M": 38177,
+          "3XL": 42120,
+          "XXL": 38219
+        }
+      },
+      {
+        "name": "Black",
+        "swatch": "#1c1c1c",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38192/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38192/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38192/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38192/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38192/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "XL": 38206,
+          "L": 38192,
+          "M": 38178,
+          "S": 38164,
+          "3XL": 42122,
+          "XXL": 38220
+        }
+      },
+      {
+        "name": "Orange",
+        "swatch": "#e3592a",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/42802/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/42802/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/42802/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/42802/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/42802/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "S": 42796,
+          "M": 42799,
+          "L": 42802,
+          "XL": 42805,
+          "3XL": 42811,
+          "XXL": 42808
+        }
+      },
+      {
+        "name": "Charcoal",
+        "swatch": "#565459",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38181/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38181/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38181/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38181/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/38181/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "S": 38153,
+          "M": 38167,
+          "XL": 38195,
+          "L": 38181,
+          "3XL": 42109,
+          "XXL": 38209
+        }
+      },
+      {
+        "name": "Ice Grey",
+        "swatch": "#cfcecc",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/66243/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/66243/100616/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/66243/100619/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/66243/127673/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fcb2fe6ec8a6d110b144/66243/97992/my-mayor-muslim-my-bagels-jewish-my-cream-cheese-chive-t-shirt.jpg?camera_label=front",
+        "variants": {
           "XL": 66244,
-          "XXL": 66245,
-          "3XL": 66246
+          "L": 66243,
+          "S": 66241,
+          "M": 66242,
+          "3XL": 66246,
+          "XXL": 66245
         }
       }
     ]
@@ -382,6 +524,25 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a27c372cf9078f4a3052270",
     "colors": [
       {
+        "name": "Granite",
+        "swatch": "#9b9a94",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79133,
+          "L": 73982,
+          "XL": 73989,
+          "S": 73968,
+          "M": 73975,
+          "XXL": 73996
+        }
+      },
+      {
         "name": "White",
         "swatch": "#efece2",
         "images": [
@@ -458,25 +619,6 @@ export const CATALOG: Record<string, Product> = {
         }
       },
       {
-        "name": "Granite",
-        "swatch": "#9b9a94",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79133,
-          "L": 73982,
-          "XL": 73989,
-          "S": 73968,
-          "M": 73975,
-          "XXL": 73996
-        }
-      },
-      {
         "name": "Mystic Blue",
         "swatch": "#5f7e93",
         "images": [
@@ -504,6 +646,25 @@ export const CATALOG: Record<string, Product> = {
     "blurb": "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
     "printifyProductId": "6a27dd8575aae553c70ecf64",
     "colors": [
+      {
+        "name": "Mystic Blue",
+        "swatch": "#5f7e93",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79151,
+          "L": 79033,
+          "S": 79031,
+          "XL": 79034,
+          "M": 79032,
+          "XXL": 79035
+        }
+      },
       {
         "name": "White",
         "swatch": "#efece2",
@@ -578,25 +739,6 @@ export const CATALOG: Record<string, Product> = {
           "S": 73968,
           "M": 73975,
           "XXL": 73996
-        }
-      },
-      {
-        "name": "Mystic Blue",
-        "swatch": "#5f7e93",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79151,
-          "L": 79033,
-          "S": 79031,
-          "XL": 79034,
-          "M": 79032,
-          "XXL": 79035
         }
       }
     ]
