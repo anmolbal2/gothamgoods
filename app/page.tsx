@@ -44,19 +44,22 @@ export default async function Home() {
             {heroEyebrow(series)}
           </p>
 
-          <div className="grid items-center gap-10 lg:grid-cols-2">
+          {/* Full-width headline so each line (incl. "TRUMP KILLED THE VIBES")
+              stays on one line; the clamp scales it to fit any viewport. */}
+          <h1 className="font-display uppercase leading-[0.95] tracking-tight text-[clamp(1.5rem,7vw,4.75rem)]">
+            {HERO_LINES.map((line, i) => (
+              <span
+                key={i}
+                className={`block whitespace-nowrap ${i === HERO_LINES.length - 1 ? "text-orange" : ""}`}
+              >
+                {line}
+              </span>
+            ))}
+          </h1>
+
+          <div className="mt-10 grid items-center gap-10 lg:grid-cols-2">
             <div>
-              <h1 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl">
-                {HERO_LINES.map((line, i) => (
-                  <span
-                    key={i}
-                    className={`block ${i === HERO_LINES.length - 1 ? "text-orange" : ""}`}
-                  >
-                    {line}
-                  </span>
-                ))}
-              </h1>
-              <p className="mt-6 max-w-md text-lg text-white/75">
+              <p className="max-w-md text-lg text-white/75">
                 Officially unofficial New York fan merch. New drop every day of the run
                 — free shipping from New Jersey.
               </p>

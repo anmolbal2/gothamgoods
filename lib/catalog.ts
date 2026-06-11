@@ -155,25 +155,6 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a29fb43b68139813c06d632",
     "colors": [
       {
-        "name": "Orange",
-        "swatch": "#e3592a",
-        "images": [
-          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
-          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
-        "variants": {
-          "S": 42796,
-          "M": 42799,
-          "L": 42802,
-          "XL": 42805,
-          "3XL": 42811,
-          "XXL": 42808
-        }
-      },
-      {
         "name": "White",
         "swatch": "#efece2",
         "images": [
@@ -228,6 +209,25 @@ export const CATALOG: Record<string, Product> = {
           "M": 38175,
           "3XL": 42118,
           "XXL": 38217
+        }
+      },
+      {
+        "name": "Orange",
+        "swatch": "#e3592a",
+        "images": [
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100616/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/100619/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/127673/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a29fb43b68139813c06d632/42802/97992/knicks-in-5-t-shirt-knicks-basketball-tee-orange-moon-x-design.jpg?camera_label=front",
+        "variants": {
+          "S": 42796,
+          "M": 42799,
+          "L": 42802,
+          "XL": 42805,
+          "3XL": 42811,
+          "XXL": 42808
         }
       },
       {
@@ -401,6 +401,25 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a27c36891cf9037720216b7",
     "colors": [
       {
+        "name": "Grey",
+        "swatch": "#b9bbbb",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98448/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100634/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-front",
+          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79137,
+          "L": 78973,
+          "M": 78972,
+          "XL": 78974,
+          "S": 78971,
+          "XXL": 78975
+        }
+      },
+      {
         "name": "White",
         "swatch": "#efece2",
         "images": [
@@ -458,25 +477,6 @@ export const CATALOG: Record<string, Product> = {
         }
       },
       {
-        "name": "Grey",
-        "swatch": "#b9bbbb",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98448/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-2",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100634/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-front",
-          "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/100637/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-4-context"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27c36891cf9037720216b7/78973/98445/my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79137,
-          "L": 78973,
-          "M": 78972,
-          "XL": 78974,
-          "S": 78971,
-          "XXL": 78975
-        }
-      },
-      {
         "name": "Granite",
         "swatch": "#9b9a94",
         "images": [
@@ -524,22 +524,22 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a27c372cf9078f4a3052270",
     "colors": [
       {
-        "name": "Granite",
-        "swatch": "#9b9a94",
+        "name": "Black",
+        "swatch": "#1c1c1c",
         "images": [
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
         ],
-        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
         "variants": {
-          "3XL": 79133,
-          "L": 73982,
-          "XL": 73989,
-          "S": 73968,
-          "M": 73975,
-          "XXL": 73996
+          "3XL": 79114,
+          "L": 73204,
+          "XL": 73208,
+          "M": 73200,
+          "S": 73196,
+          "XXL": 73212
         }
       },
       {
@@ -559,25 +559,6 @@ export const CATALOG: Record<string, Product> = {
           "XL": 73211,
           "L": 73207,
           "XXL": 73215
-        }
-      },
-      {
-        "name": "Black",
-        "swatch": "#1c1c1c",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
-          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73204/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79114,
-          "L": 73204,
-          "XL": 73208,
-          "M": 73200,
-          "S": 73196,
-          "XXL": 73212
         }
       },
       {
@@ -619,6 +600,25 @@ export const CATALOG: Record<string, Product> = {
         }
       },
       {
+        "name": "Granite",
+        "swatch": "#9b9a94",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126095/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/126111/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=person-5-context-2",
+          "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/100629/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=folded"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27c372cf9078f4a3052270/73982/98445/copy-of-my-mayor-muslim-knicks-in-four-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79133,
+          "L": 73982,
+          "XL": 73989,
+          "S": 73968,
+          "M": 73975,
+          "XXL": 73996
+        }
+      },
+      {
         "name": "Mystic Blue",
         "swatch": "#5f7e93",
         "images": [
@@ -647,22 +647,22 @@ export const CATALOG: Record<string, Product> = {
     "printifyProductId": "6a27dd8575aae553c70ecf64",
     "colors": [
       {
-        "name": "Mystic Blue",
-        "swatch": "#5f7e93",
+        "name": "Grey",
+        "swatch": "#b9bbbb",
         "images": [
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
         ],
-        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
         "variants": {
-          "3XL": 79151,
-          "L": 79033,
-          "S": 79031,
-          "XL": 79034,
-          "M": 79032,
-          "XXL": 79035
+          "3XL": 79137,
+          "L": 78973,
+          "M": 78972,
+          "XL": 78974,
+          "S": 78971,
+          "XXL": 78975
         }
       },
       {
@@ -704,25 +704,6 @@ export const CATALOG: Record<string, Product> = {
         }
       },
       {
-        "name": "Grey",
-        "swatch": "#b9bbbb",
-        "images": [
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
-          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
-        ],
-        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/78973/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
-        "variants": {
-          "3XL": 79137,
-          "L": 78973,
-          "M": 78972,
-          "XL": 78974,
-          "S": 78971,
-          "XXL": 78975
-        }
-      },
-      {
         "name": "Granite",
         "swatch": "#9b9a94",
         "images": [
@@ -739,6 +720,25 @@ export const CATALOG: Record<string, Product> = {
           "S": 73968,
           "M": 73975,
           "XXL": 73996
+        }
+      },
+      {
+        "name": "Mystic Blue",
+        "swatch": "#5f7e93",
+        "images": [
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/112433/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98448/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-2",
+          "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/126095/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=person-5-context"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a27dd8575aae553c70ecf64/79033/98445/he-is-my-doctor-he-is-my-engineer-he-is-my-pastor-he-is-my-father-t-shirt.jpg?camera_label=front",
+        "variants": {
+          "3XL": 79151,
+          "L": 79033,
+          "S": 79031,
+          "XL": 79034,
+          "M": 79032,
+          "XXL": 79035
         }
       }
     ]

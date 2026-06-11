@@ -39,7 +39,7 @@ const PRODUCTS = [
     blurb:
       "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     views: ["front", "person-1-front", "person-2-front", "lifestyle"],
-    defaultColor: "Orange",
+    defaultColor: "White",
   },
   {
     id: "6a29fcb2fe6ec8a6d110b144",
@@ -59,7 +59,7 @@ const PRODUCTS = [
     blurb:
       "Everyone's better than Jalen Brunson — until it's time to be better than Jalen Brunson. For the doubters and the believers.",
     views: ["front", "person-2", "person-4-front", "person-4-context"],
-    defaultColor: "White",
+    defaultColor: "Grey",
   },
   {
     id: "6a27c372cf9078f4a3052270",
@@ -69,7 +69,7 @@ const PRODUCTS = [
     blurb:
       "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
     views: ["front", "person-5-context", "person-5-context-2", "folded"],
-    defaultColor: "Granite",
+    defaultColor: "Black",
   },
   {
     id: "6a27dd8575aae553c70ecf64",
@@ -79,7 +79,7 @@ const PRODUCTS = [
     blurb:
       "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
     views: ["front", "person-1-front", "person-2", "person-5-context"],
-    defaultColor: "Mystic Blue",
+    defaultColor: "Grey",
   },
 ];
 
