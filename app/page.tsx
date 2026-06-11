@@ -45,15 +45,16 @@ export default async function Home() {
           </p>
 
           {/* Balanced split: headline + copy on the left, product on the right.
-              The headline is sized + nowrapped so "TRUMP KILLED THE VIBES" stays
-              on one line; the left column is a touch wider to give it room. */}
-          <div className="grid items-center gap-10 lg:grid-cols-[1.2fr_1fr]">
+              Headline keeps its original size; the left column is widened and the
+              product image is smaller so "TRUMP KILLED THE VIBES" (~623px at
+              text-7xl) fits on one line beside it. */}
+          <div className="grid items-center gap-10 lg:grid-cols-[2.2fr_1fr]">
             <div>
-              <h1 className="font-display text-3xl uppercase leading-[0.9] tracking-tight sm:text-5xl">
+              <h1 className="font-display text-5xl uppercase leading-[0.9] tracking-tight sm:text-6xl md:text-7xl">
                 {HERO_LINES.map((line, i) => (
                   <span
                     key={i}
-                    className={`block whitespace-nowrap ${i === HERO_LINES.length - 1 ? "text-orange" : ""}`}
+                    className={`block ${i === HERO_LINES.length - 1 ? "text-orange" : ""}`}
                   >
                     {line}
                   </span>
@@ -71,9 +72,9 @@ export default async function Home() {
               </a>
             </div>
 
-            <div className="px-6">
+            <div className="px-2">
               {heroImage ? (
-                <div className="mx-auto max-w-md overflow-hidden rounded-xl bg-white p-3 shadow-xl">
+                <div className="mx-auto max-w-sm overflow-hidden rounded-xl bg-white p-3 shadow-xl">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={heroImage} alt={hero.name} className="w-full" />
                 </div>
