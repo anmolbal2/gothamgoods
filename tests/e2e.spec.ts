@@ -24,6 +24,8 @@ test("Buy redirects to Stripe Checkout with the correct server-priced order", as
 }) => {
   test.setTimeout(90_000);
 
+  // Suppress the sale takeover via its own session gate so clicks aren't blocked.
+  await page.addInitScript(() => sessionStorage.setItem("gg_sale_takeover_v1", "1"));
   await page.goto("/");
 
   const card = page.getByTestId("product-card").first();

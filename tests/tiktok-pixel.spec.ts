@@ -34,6 +34,8 @@ function trackEntries(page: Page, name: string): Promise<Entry[]> {
 test.describe("TikTok Pixel — browser events (offline)", () => {
   test.beforeEach(async ({ page }) => {
     await blockExternalPixels(page);
+    // Suppress the sale takeover via its own session gate so clicks aren't blocked.
+    await page.addInitScript(() => sessionStorage.setItem("gg_sale_takeover_v1", "1"));
   });
 
   test("loader fires a PageView and the hero fires ViewContent", async ({ page }) => {
