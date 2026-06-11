@@ -58,11 +58,12 @@ async function generateScarcityCopy(
   const model = process.env.ANTHROPIC_MODEL || "claude-opus-4-6";
   const system =
     "You write punchy, irreverent NYC fan-merch ad copy for Gotham Goods during the Knicks' NBA finals run. " +
-    "Every ad must LEAD with scarcity + urgency: limited inventory / low stock / almost gone, AND that the drop " +
-    "ends when the Finals do. Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
+    "RIGHT NOW: the Knicks erased a 29-point deficit in Game 4, so EVERYTHING is 29% off — the comeback sale " +
+    "($35.49, list $49.99) ends at Game 5 tip-off. Every ad must LEAD with the comeback + the 29% sale urgency. " +
+    "Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
   const user =
-    `Write ONE fresh ad for the "${productName}" tee ($39.99). Respond with STRICT JSON only:\n` +
-    `{"message":"primary text, <=200 chars, opens with a scarcity/urgency hook (⚠️ limited inventory / low stock / almost gone) + the Finals-ending angle","headline":"<=40 chars, ends with '$39.99'"}\n\n` +
+    `Write ONE fresh ad for the "${productName}" tee (29% comeback sale: $35.49, list $49.99). Respond with STRICT JSON only:\n` +
+    `{"message":"primary text, <=200 chars, opens with the down-29 comeback + 29% off urgency (sale ends at Game 5 tip-off)","headline":"<=40 chars, ends with '$35.49'"}\n\n` +
     `Product vibe: ${blurb.slice(0, 200)}`;
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", {

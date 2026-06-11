@@ -14,7 +14,14 @@ if (!TOKEN || !SHOP) {
   process.exit(1);
 }
 
-const PRICE_CENTS = 3999;
+// COMEBACK SALE PRICING — Knicks erased a 29-point deficit in Game 4, so everything
+// is 29% off. COMPARE_AT is the list price (and becomes the real price when the sale
+// ends); PRICE_CENTS is what's actually charged everywhere (cart/Stripe/pixels/feeds).
+// To END the sale: set SALE_PCT = 0 (price becomes $49.99), flip SALE.active in
+// lib/sale.ts, regen this catalog, deploy.
+const COMPARE_AT_CENTS = 4999; // $49.99 list
+const SALE_PCT = 29; // Game-4 comeback sale
+const PRICE_CENTS = Math.floor((COMPARE_AT_CENTS * (100 - SALE_PCT)) / 100); // 3549 = $35.49
 
 // Curated product metadata, in display order.
 // Each product gets a LARGELY DIFFERENT set of Printify stock mockups (different
@@ -196,6 +203,8 @@ for (const meta of PRODUCTS) {
   catalog[meta.key] = {
     name: meta.name,
     priceCents: PRICE_CENTS,
+    // After priceCents on purpose: scripts/lib/catalog-load.mjs regex-parses this file.
+    ...(SALE_PCT > 0 ? { compareAtCents: COMPARE_AT_CENTS } : {}),
     tagline: meta.tagline,
     blurb: meta.blurb,
     printifyProductId: meta.id,
@@ -228,7 +237,8 @@ export interface ColorVariant {
 
 export interface Product {
   name: string;
-  priceCents: number;
+  priceCents: number; // the CHARGED price (sale price while a sale is active)
+  compareAtCents?: number; // anchor/list price for display only — never charged
   tagline?: string;
   blurb?: string;
   printifyProductId: string;

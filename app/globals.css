@@ -52,3 +52,17 @@ body {
 /* Intentionally NOT disabled under prefers-reduced-motion: the ticker is a slow,
    decorative brand element and should keep scrolling on phones (where Reduce Motion
    / Low Power Mode is commonly on). */
+
+/* Comeback-sale badge pulse (subtle). */
+@keyframes sale-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.72;
+  }
+}
+.sale-pulse {
+  animation: sale-pulse 2s ease-in-out infinite;
+}

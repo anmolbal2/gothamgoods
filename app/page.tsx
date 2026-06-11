@@ -1,6 +1,8 @@
 import { listProducts } from "@/lib/catalog";
 import { heroEyebrow } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
+import { SALE } from "@/lib/sale";
+import ComebackBanner from "@/app/components/ComebackBanner";
 import FinalsTracker from "@/app/components/FinalsTracker";
 import ProductCard from "@/app/components/ProductCard";
 import { ViewContent } from "@/app/components/PixelEvents";
@@ -68,7 +70,7 @@ export default async function Home() {
                 href="#shop"
                 className="mt-8 inline-block bg-orange px-6 py-3 font-mono text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-orange-bright"
               >
-                Shop the drop ↓
+                Shop the comeback sale ↓
               </a>
             </div>
 
@@ -85,6 +87,9 @@ export default async function Home() {
         </div>
       </section>
 
+      {/* GAME-4 COMEBACK SALE BANNER (countdown targets the live Game 5 tip-off) */}
+      <ComebackBanner endISO={series.nextGame?.tipoffISO ?? SALE.endISO} />
+
       {/* LIVE FINALS TRACKER */}
       <FinalsTracker state={series} />
 
@@ -94,7 +99,7 @@ export default async function Home() {
           <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
             <h2 className="font-display text-4xl uppercase tracking-tight">Knicks in 5</h2>
             <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-              The headliner · new drop every day
+              The headliner · 29% off everything
             </p>
           </div>
 

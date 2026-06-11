@@ -51,3 +51,16 @@ test("real catalog: 3 products, each with colors + resolvable variants", () => {
     expect(line.priceCents).toBe(p.priceCents);
   }
 });
+
+test("comeback sale: every product is exactly 29% off list, charged at the sale price", () => {
+  const ps = listProducts().filter((p) => p.compareAtCents !== undefined);
+  test.skip(ps.length === 0, "no sale running");
+  for (const p of ps) {
+    expect(p.compareAtCents!).toBeGreaterThan(p.priceCents); // anchor above charged
+    expect(Math.round((1 - p.priceCents / p.compareAtCents!) * 100)).toBe(29);
+    // resolveLine (what checkout charges) uses the SALE price, never the anchor.
+    const c = p.colors[0];
+    const size = Object.keys(c.variants)[0] as Size;
+    expect(resolveLine(p.id, c.name, size).priceCents).toBe(p.priceCents);
+  }
+});

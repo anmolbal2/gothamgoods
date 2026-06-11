@@ -263,6 +263,13 @@ export function CartDrawer() {
     error,
   } = useCart();
 
+  // Comeback-sale savings vs the list price (display only; checkout charges priceCents).
+  const savingsCents = items.reduce((sum, it) => {
+    const p = CATALOG[it.productId];
+    if (!p?.compareAtCents || p.compareAtCents <= p.priceCents) return sum;
+    return sum + (p.compareAtCents - p.priceCents) * it.qty;
+  }, 0);
+
   return (
     <>
       <div
@@ -358,6 +365,16 @@ export function CartDrawer() {
             </span>
             <span className="font-display text-2xl">{money(subtotalCents)}</span>
           </div>
+          {savingsCents > 0 && (
+            <div className="mb-1 flex items-center justify-between">
+              <span className="font-mono text-xs uppercase tracking-widest text-orange">
+                Comeback sale savings
+              </span>
+              <span className="font-mono text-sm font-bold text-orange">
+                −{money(savingsCents)}
+              </span>
+            </div>
+          )}
           <div className="mb-3 flex items-center justify-between">
             <span className="font-mono text-xs uppercase tracking-widest text-ink/60">
               Shipping

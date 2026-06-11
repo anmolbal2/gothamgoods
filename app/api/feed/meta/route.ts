@@ -55,7 +55,10 @@ export async function GET(): Promise<Response> {
   const items = listProducts()
     .map((p) => {
       const image = pickFeedImage(p);
-      const price = (p.priceCents / 100).toFixed(2);
+      // On sale: g:price is the list/anchor price, g:sale_price is what's charged.
+      const onSale = !!p.compareAtCents && p.compareAtCents > p.priceCents;
+      const price = ((onSale ? p.compareAtCents! : p.priceCents) / 100).toFixed(2);
+      const salePrice = (p.priceCents / 100).toFixed(2);
       const description = p.blurb ?? p.name;
       return `    <item>
       <g:id>${esc(p.id)}</g:id>
@@ -65,7 +68,7 @@ export async function GET(): Promise<Response> {
       <g:image_link>${esc(image)}</g:image_link>
       <g:availability>in stock</g:availability>
       <g:condition>new</g:condition>
-      <g:price>${price} USD</g:price>
+      <g:price>${price} USD</g:price>${onSale ? `\n      <g:sale_price>${salePrice} USD</g:sale_price>` : ""}
       <g:brand>Gotham Goods</g:brand>
       <g:google_product_category>1604</g:google_product_category>
     </item>`;
