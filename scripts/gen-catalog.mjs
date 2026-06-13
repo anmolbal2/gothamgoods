@@ -39,6 +39,27 @@ const PRODUCTS = [
     defaultColor: "Black",
   },
   {
+    // HEADLINER — featured in the hero (see app/page.tsx).
+    id: "6a2d9a0173ad2eacae0ee154",
+    key: "popes-on-our-side",
+    name: "Pope's on Our Side Tee",
+    tagline: "POPE'S ON OUR SIDE",
+    blurb:
+      "My Mayor Muslim, my bagels Jewish, the Pope's on our side — divine intervention says Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    views: ["front", "person-1-front", "person-2-front", "lifestyle"],
+    defaultColor: "White",
+  },
+  {
+    id: "6a2d9b4064e16026a6060e28",
+    key: "saturday-night-live",
+    name: "Saturday Night Live Tee",
+    tagline: "MY SATURDAY NIGHT LIVE",
+    blurb:
+      "My Mayor Muslim, my bagels Jewish, my Saturday Night Live — the full New York starter pack, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    views: ["front", "person-1-front", "person-2-front", "lifestyle"],
+    defaultColor: "Royal",
+  },
+  {
     id: "6a29fb43b68139813c06d632",
     key: "knicks-in-five",
     name: "Knicks in Five Tee",
@@ -46,7 +67,7 @@ const PRODUCTS = [
     blurb:
       "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     views: ["front", "person-1-front", "person-2-front", "lifestyle"],
-    defaultColor: "White",
+    defaultColor: "Black",
   },
   {
     id: "6a29fcb2fe6ec8a6d110b144",
@@ -56,7 +77,7 @@ const PRODUCTS = [
     blurb:
       "My Mayor Muslim, my bagels Jewish, my cream cheese chive — the full New York order, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     views: ["front", "person-1-front", "person-2-front", "lifestyle"],
-    defaultColor: "Royal",
+    defaultColor: "Ice Grey",
   },
   {
     id: "6a27c36891cf9037720216b7",

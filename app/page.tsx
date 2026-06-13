@@ -11,16 +11,21 @@ import { ViewContent } from "@/app/components/PixelEvents";
 // Re-render with fresh series data from Supabase (the cron writes it); ISR window.
 export const revalidate = 120;
 
-// The "Trump killed the vibes" Knicks-in-5 tee is the headliner.
+// The "Pope's on our side" Knicks-in-5 tee is the headliner.
 const HERO_LINES = [
   "MY MAYOR MUSLIM",
   "MY BAGELS JEWISH",
-  "TRUMP KILLED THE VIBES",
+  "POPE'S ON OUR SIDE",
   "KNICKS IN 5",
 ];
 
-// Product keys that belong to the dedicated "Knicks in 5" section.
-const KNICKS5 = ["knicks-in-five", "cream-cheese-chive"];
+// Product keys for the dedicated "Knicks in 5" section, in priority order.
+const KNICKS5 = [
+  "popes-on-our-side",
+  "saturday-night-live",
+  "knicks-in-five",
+  "cream-cheese-chive",
+];
 
 export default async function Home() {
   const all = listProducts();
@@ -30,8 +35,8 @@ export default async function Home() {
   const knicks5 = KNICKS5.map((k) => byId[k]).filter(Boolean);
   const rest = all.filter((p) => !KNICKS5.includes(p.id));
 
-  // Headliner = the "Trump killed the vibes" tee (falls back to first product).
-  const hero = byId["knicks-in-five"] ?? all[0];
+  // Headliner = the "Pope's on our side" tee (falls back to first product).
+  const hero = byId["popes-on-our-side"] ?? all[0];
   const heroImage = hero?.colors[0]?.image;
 
   return (
