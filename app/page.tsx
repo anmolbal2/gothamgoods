@@ -3,7 +3,7 @@ import { heroEyebrow } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
 import { SALE } from "@/lib/sale";
 import ComebackBanner from "@/app/components/ComebackBanner";
-import SaleTakeover from "@/app/components/SaleTakeover";
+import SaleSticker from "@/app/components/SaleSticker";
 import FinalsTracker from "@/app/components/FinalsTracker";
 import ProductCard from "@/app/components/ProductCard";
 import { ViewContent } from "@/app/components/PixelEvents";
@@ -45,8 +45,8 @@ export default async function Home() {
         <ViewContent productId={hero.id} valueCents={hero.priceCents} />
       ) : null}
 
-      {/* FULL-SCREEN SALE TAKEOVER (once per session — can't-miss-it splash) */}
-      <SaleTakeover endISO={series.nextGame?.tipoffISO ?? SALE.endISO} />
+      {/* Persistent comeback-sale sticker pinned in the top corner. */}
+      <SaleSticker />
 
       {/* HERO */}
       <section className="bg-blue text-white">
