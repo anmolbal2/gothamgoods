@@ -15,7 +15,7 @@
  * 4. Commit + push to main (deploys). Feeds/checkout/UI all flip together.
  */
 export const SALE = {
-  active: true,
+  active: false,
   pct: 29,
   headline: "DOWN 29. WON ANYWAY.",
   sub: "Game 4 · the comeback",

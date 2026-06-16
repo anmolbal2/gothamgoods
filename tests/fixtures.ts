@@ -51,7 +51,7 @@ export function buildCheckoutCompleted(opts: BuildOpts = {}) {
     { product_id: "PLACEHOLDER_KNICKS", variant_id: 1002, quantity: 1 },
   ];
   const contentIds = opts.contentIds ?? ["knicks-in-four"];
-  const amountTotal = opts.amountTotal ?? 3549;
+  const amountTotal = opts.amountTotal ?? 4999;
   const metadata =
     opts.metadataOverride ?? {
       printify_items: JSON.stringify(printifyItems),
