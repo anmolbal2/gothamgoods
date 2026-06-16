@@ -57,13 +57,13 @@ async function generateScarcityCopy(
   if (!key) return null;
   const model = process.env.ANTHROPIC_MODEL || "claude-opus-4-6";
   const system =
-    "You write punchy, irreverent NYC fan-merch ad copy for Gotham Goods during the Knicks' NBA finals run. " +
-    "RIGHT NOW: the Knicks erased a 29-point deficit in Game 4, so EVERYTHING is 29% off — the comeback sale " +
-    "($35.49, list $49.99) ends at Game 5 tip-off. Every ad must LEAD with the comeback + the 29% sale urgency. " +
-    "Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
+    "You write punchy, irreverent NYC fan-merch ad copy for Gotham Goods. " +
+    "RIGHT NOW: the Knicks just WON the 2026 NBA title in GAME 5 — their first since 1973 — and these checklist " +
+    "tees literally predicted 'KNICKS IN 5'. Every ad must LEAD with the championship + 'we called it / the shirt " +
+    "that called it' pride. The tees are $49.99. Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
   const user =
-    `Write ONE fresh ad for the "${productName}" tee (29% comeback sale: $35.49, list $49.99). Respond with STRICT JSON only:\n` +
-    `{"message":"primary text, <=200 chars, opens with the down-29 comeback + 29% off urgency (sale ends at Game 5 tip-off)","headline":"<=40 chars, ends with '$35.49'"}\n\n` +
+    `Write ONE fresh ad for the "${productName}" tee ($49.99). Respond with STRICT JSON only:\n` +
+    `{"message":"primary text, <=200 chars, opens with the championship win + 'we called it / Knicks in 5' angle","headline":"<=40 chars, championship/we-called-it angle"}\n\n` +
     `Product vibe: ${blurb.slice(0, 200)}`;
   try {
     const r = await fetch("https://api.anthropic.com/v1/messages", {
@@ -157,7 +157,12 @@ export async function GET(request: Request) {
     if (!products.length) {
       result.refresh = "skipped: no products";
     } else {
-      const p = products[Math.floor(Math.random() * products.length)];
+      // Spearhead the two "starter pack" checklist tees that called Knicks-in-5
+      // (fall back to all products if neither is in the catalog).
+      const FOCUS = ["popes-on-our-side", "saturday-night-live"];
+      const pool = products.filter((x) => FOCUS.includes(x.id));
+      const choices = pool.length ? pool : products;
+      const p = choices[Math.floor(Math.random() * choices.length)];
       const img = pickAdImage(p);
       const copy = await generateScarcityCopy(p.name, p.blurb || "");
       if (!img) {

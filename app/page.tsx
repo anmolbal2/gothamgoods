@@ -79,7 +79,7 @@ export default async function Home() {
                 href="#shop"
                 className="mt-8 inline-block bg-orange px-6 py-3 font-mono text-sm font-bold uppercase tracking-widest text-ink transition hover:bg-orange-bright"
               >
-                Shop the comeback sale ↓
+                Shop the championship collection ↓
               </a>
             </div>
 
@@ -108,7 +108,7 @@ export default async function Home() {
           <div className="mb-8 flex items-end justify-between border-b-2 border-ink pb-4">
             <h2 className="font-display text-4xl uppercase tracking-tight">Knicks in 5</h2>
             <p className="font-mono text-xs uppercase tracking-widest text-ink/60">
-              The headliner · 29% off everything
+              The headliner · the shirt that called it
             </p>
           </div>
 
