@@ -60,9 +60,9 @@ async function generateScarcityCopy(
     "You write punchy, irreverent NYC fan-merch ad copy for Gotham Goods. " +
     "RIGHT NOW: the Knicks just WON the 2026 NBA title in GAME 5 — their first since 1973 — and these checklist " +
     "tees literally predicted 'KNICKS IN 5'. Every ad must LEAD with the championship + 'we called it / the shirt " +
-    "that called it' pride. The tees are $49.99. Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
+    "that called it' pride. The tees are $39.99. Mention free shipping from New Jersey. Fan-made, never claims NBA affiliation.";
   const user =
-    `Write ONE fresh ad for the "${productName}" tee ($49.99). Respond with STRICT JSON only:\n` +
+    `Write ONE fresh ad for the "${productName}" tee ($39.99). Respond with STRICT JSON only:\n` +
     `{"message":"primary text, <=200 chars, opens with the championship win + 'we called it / Knicks in 5' angle","headline":"<=40 chars, championship/we-called-it angle"}\n\n` +
     `Product vibe: ${blurb.slice(0, 200)}`;
   try {

@@ -52,15 +52,13 @@ test("real catalog: 3 products, each with colors + resolvable variants", () => {
   }
 });
 
-test("comeback sale: every product is exactly 29% off list, charged at the sale price", () => {
-  const ps = listProducts().filter((p) => p.compareAtCents !== undefined);
-  test.skip(ps.length === 0, "no sale running");
-  for (const p of ps) {
-    expect(p.compareAtCents!).toBeGreaterThan(p.priceCents); // anchor above charged
-    expect(Math.round((1 - p.priceCents / p.compareAtCents!) * 100)).toBe(29);
-    // resolveLine (what checkout charges) uses the SALE price, never the anchor.
+test("no sale: every product is a flat $39.99 with no compare-at anchor", () => {
+  for (const p of listProducts()) {
+    expect(p.priceCents).toBe(3999);
+    expect(p.compareAtCents).toBeUndefined();
+    // resolveLine (what checkout charges) matches the listed price.
     const c = p.colors[0];
     const size = Object.keys(c.variants)[0] as Size;
-    expect(resolveLine(p.id, c.name, size).priceCents).toBe(p.priceCents);
+    expect(resolveLine(p.id, c.name, size).priceCents).toBe(3999);
   }
 });

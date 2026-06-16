@@ -4,7 +4,6 @@ import Script from "next/script";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
 import "./globals.css";
 import { buildTickerItems } from "@/lib/series";
-import { saleTickerItems } from "@/lib/sale";
 import { getSeriesState } from "@/lib/series-store";
 import { CartProvider, CartButton, CartDrawer } from "@/app/components/cart";
 import { PixelPageView } from "@/app/components/PixelEvents";
@@ -59,7 +58,7 @@ export default async function RootLayout({
 }: Readonly<{ children: React.ReactNode }>) {
   const year = new Date().getFullYear();
   const series = await getSeriesState();
-  const tickerItems = [...saleTickerItems(), ...buildTickerItems(series)];
+  const tickerItems = buildTickerItems(series);
   return (
     <html
       lang="en"

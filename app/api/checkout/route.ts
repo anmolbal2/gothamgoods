@@ -1,7 +1,6 @@
 import type Stripe from "stripe";
 import { stripe } from "@/lib/stripe";
 import { resolveLine, type Size } from "@/lib/catalog";
-import { SALE } from "@/lib/sale";
 import type { PrintifyItem } from "@/lib/printify";
 import { sendEvents } from "@/lib/meta-capi";
 import {
@@ -62,12 +61,8 @@ export async function POST(request: Request) {
         price_data: {
           currency: "usd",
           unit_amount: priceCents,
-          // The sale note renders under the line item on the Stripe page. It is a
-          // PRODUCT description — Stripe line_items[].description (used by our
-          // receipts as the item name) still resolves to the product name.
           product_data: {
             name,
-            ...(SALE.active ? { description: SALE.stripeNote } : {}),
           },
         },
         quantity,

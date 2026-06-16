@@ -73,7 +73,7 @@ test.describe("TikTok Events API — server CompletePayment (offline)", () => {
     const { payload, header } = signEvent(
       buildCheckoutCompleted({
         sessionId,
-        amountTotal: 4999,
+        amountTotal: 3999,
         contentIds: [SLUG],
       }),
     );
@@ -94,7 +94,7 @@ test.describe("TikTok Events API — server CompletePayment (offline)", () => {
     expect(ev.event).toBe("CompletePayment");
     // Dedup key: same Stripe session id the browser CompletePayment uses.
     expect(ev.event_id).toBe(sessionId);
-    expect(ev.properties.value).toBe(49.99);
+    expect(ev.properties.value).toBe(39.99);
     expect(ev.properties.currency).toBe("USD");
     expect(ev.properties.content_type).toBe("product");
     expect(ev.properties.contents[0].content_id).toBe(SLUG);

@@ -23,13 +23,6 @@ export default function ProductCard({
   );
   const [added, setAdded] = useState(false);
 
-  // Comeback sale: compareAtCents is the display-only list price; priceCents is charged.
-  const onSale =
-    product.compareAtCents !== undefined && product.compareAtCents > product.priceCents;
-  const pctOff = onSale
-    ? Math.round((1 - product.priceCents / product.compareAtCents!) * 100)
-    : 0;
-
   function onAdd() {
     const s = color.variants[size] !== undefined ? size : available[0];
     add(product.id, color.name, s);
@@ -65,11 +58,6 @@ export default function ProductCard({
             {product.name}
           </h3>
           <span className="flex items-baseline gap-1.5 whitespace-nowrap">
-            {onSale ? (
-              <span className="font-mono text-sm text-ink/40 line-through">
-                {money(product.compareAtCents!)}
-              </span>
-            ) : null}
             <span className="font-display text-xl text-orange">
               {money(product.priceCents)}
             </span>
@@ -77,11 +65,6 @@ export default function ProductCard({
         </div>
         <p className="mt-1 flex items-center gap-2 font-mono text-[11px] font-bold uppercase tracking-widest text-orange">
           <span>Free shipping</span>
-          {onSale ? (
-            <span className="sale-pulse bg-ink px-1.5 py-0.5 text-[10px] text-orange">
-              {pctOff}% off
-            </span>
-          ) : null}
         </p>
         {product.blurb && (
           <p className="mt-2 line-clamp-2 text-sm text-ink/70">{product.blurb}</p>

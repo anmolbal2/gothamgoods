@@ -27,7 +27,7 @@ export interface Product {
 export const CATALOG: Record<string, Product> = {
   "knicks-in-four": {
     "name": "Knicks in Four Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "MY MAYOR MUSLIM",
     "blurb": "The whole city is saying it, so we put it on a shirt. Heavyweight Comfort Colors cotton, shipped from New Jersey.",
     "printifyProductId": "6a27897a8f2246d09f0acb65",
@@ -150,7 +150,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "popes-on-our-side": {
     "name": "Pope's on Our Side Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "POPE'S ON OUR SIDE",
     "blurb": "My Mayor Muslim, my bagels Jewish, the Pope's on our side — divine intervention says Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     "printifyProductId": "6a2d9a0173ad2eacae0ee154",
@@ -273,7 +273,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "saturday-night-live": {
     "name": "Saturday Night Live Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "MY SATURDAY NIGHT LIVE",
     "blurb": "My Mayor Muslim, my bagels Jewish, my Saturday Night Live — the full New York starter pack, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     "printifyProductId": "6a2d9b4064e16026a6060e28",
@@ -396,7 +396,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "knicks-in-five": {
     "name": "Knicks in Five Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "TRUMP KILLED THE VIBES",
     "blurb": "The whole bit, updated for Game 5 — My Mayor Muslim, My Bagels Jewish, and Trump killed the vibes. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     "printifyProductId": "6a29fb43b68139813c06d632",
@@ -519,7 +519,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "cream-cheese-chive": {
     "name": "Cream Cheese Chive Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "MY CREAM CHEESE CHIVE",
     "blurb": "My Mayor Muslim, my bagels Jewish, my cream cheese chive — the full New York order, Knicks in 5. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
     "printifyProductId": "6a29fcb2fe6ec8a6d110b144",
@@ -642,7 +642,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "better-than-brunson": {
     "name": "Better Than Brunson Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "CAPTAIN CLUTCH",
     "blurb": "Everyone's better than Jalen Brunson — until it's time to be better than Jalen Brunson. For the doubters and the believers.",
     "printifyProductId": "6a27c36891cf9037720216b7",
@@ -765,7 +765,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "corgi-wrong": {
     "name": "Corgi's Gonna Be Wrong Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "FADE THE CORGI",
     "blurb": "The corgi's gonna be wrongggg. For everyone who fades the playoff pet picks and rides with New York.",
     "printifyProductId": "6a27c372cf9078f4a3052270",
@@ -888,7 +888,7 @@ export const CATALOG: Record<string, Product> = {
   },
   "he-is-my-everything": {
     "name": "He Is My Everything Tee",
-    "priceCents": 4999,
+    "priceCents": 3999,
     "tagline": "HE IS MY FATHER",
     "blurb": "Doctor, engineer, pastor, father — he's the whole résumé, and we only needed him to hit the corner three. Heavyweight Comfort Colors cotton, shipped fresh out of New Jersey.",
     "printifyProductId": "6a27dd8575aae553c70ecf64",

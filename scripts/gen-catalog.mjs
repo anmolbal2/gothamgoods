@@ -14,14 +14,13 @@ if (!TOKEN || !SHOP) {
   process.exit(1);
 }
 
-// COMEBACK SALE PRICING — Knicks erased a 29-point deficit in Game 4, so everything
-// is 29% off. COMPARE_AT is the list price (and becomes the real price when the sale
-// ends); PRICE_CENTS is what's actually charged everywhere (cart/Stripe/pixels/feeds).
-// To END the sale: set SALE_PCT = 0 (price becomes $49.99), flip SALE.active in
-// lib/sale.ts, regen this catalog, deploy.
-const COMPARE_AT_CENTS = 4999; // $49.99 list
-const SALE_PCT = 0; // sale ENDED 2026-06-16 (championship); list is the regular price now
-const PRICE_CENTS = Math.floor((COMPARE_AT_CENTS * (100 - SALE_PCT)) / 100); // 3549 = $35.49
+// PRICING — flat regular price, no sale. (The 2026-06 comeback sale ended when the
+// Knicks won the title; the sale UI/infra was removed. To run a future sale you'd
+// re-introduce a compareAtCents anchor + the sale components.) PRICE_CENTS is what's
+// charged everywhere (cart/Stripe/pixels/feeds).
+const PRICE_CENTS = 3999; // regular price $39.99
+const COMPARE_AT_CENTS = 0; // no anchor/strikethrough
+const SALE_PCT = 0;
 
 // Curated product metadata, in display order.
 // Each product gets a LARGELY DIFFERENT set of Printify stock mockups (different

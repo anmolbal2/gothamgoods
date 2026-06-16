@@ -1,9 +1,6 @@
 import { listProducts } from "@/lib/catalog";
 import { heroEyebrow } from "@/lib/series";
 import { getSeriesState } from "@/lib/series-store";
-import { SALE } from "@/lib/sale";
-import ComebackBanner from "@/app/components/ComebackBanner";
-import SaleSticker from "@/app/components/SaleSticker";
 import FinalsTracker from "@/app/components/FinalsTracker";
 import ProductCard from "@/app/components/ProductCard";
 import { ViewContent } from "@/app/components/PixelEvents";
@@ -44,9 +41,6 @@ export default async function Home() {
       {hero ? (
         <ViewContent productId={hero.id} valueCents={hero.priceCents} />
       ) : null}
-
-      {/* Persistent comeback-sale sticker pinned in the top corner. */}
-      <SaleSticker />
 
       {/* HERO */}
       <section className="bg-blue text-white">
@@ -95,9 +89,6 @@ export default async function Home() {
           </div>
         </div>
       </section>
-
-      {/* GAME-4 COMEBACK SALE BANNER (countdown targets the live Game 5 tip-off) */}
-      <ComebackBanner endISO={series.nextGame?.tipoffISO ?? SALE.endISO} />
 
       {/* LIVE FINALS TRACKER */}
       <FinalsTracker state={series} />
