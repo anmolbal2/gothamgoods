@@ -19,6 +19,7 @@ const HERO_LINES = [
 // Product keys for the dedicated "Knicks in 5" section, in priority order.
 const KNICKS5 = [
   "brunson-roll-call",
+  "brunson-daddy",
   "popes-on-our-side",
   "saturday-night-live",
   "knicks-in-five",

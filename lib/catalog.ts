@@ -25,6 +25,129 @@ export interface Product {
 }
 
 export const CATALOG: Record<string, Product> = {
+  "brunson-daddy": {
+    "name": "LeBron Is My Dad, Brunson Is My Daddy Tee",
+    "priceCents": 3999,
+    "tagline": "BRUNSON IS MY DADDY",
+    "blurb": "LeBron James is my dad, but Jalen Brunson is my Daddy. For all of New York after the title — Knicks in 5, champions at last. Soft cotton tee, shipped free from New Jersey in 2–3 days.",
+    "printifyProductId": "6a31f46f09dd09cc120fb784",
+    "colors": [
+      {
+        "name": "White",
+        "swatch": "#efece2",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38191/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38191/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38191/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38191/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38191/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 38163,
+          "M": 38177,
+          "L": 38191,
+          "XL": 38205,
+          "XXL": 38219,
+          "3XL": 42120
+        }
+      },
+      {
+        "name": "Black",
+        "swatch": "#1c1c1c",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38192/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38192/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38192/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38192/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38192/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 38164,
+          "M": 38178,
+          "L": 38192,
+          "XL": 38206,
+          "XXL": 38220,
+          "3XL": 42122
+        }
+      },
+      {
+        "name": "Royal",
+        "swatch": "#1c4d92",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38189/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38189/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38189/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38189/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38189/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 38161,
+          "M": 38175,
+          "L": 38189,
+          "XL": 38203,
+          "XXL": 38217,
+          "3XL": 42118
+        }
+      },
+      {
+        "name": "Orange",
+        "swatch": "#e3592a",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/42802/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/42802/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/42802/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/42802/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/42802/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 42796,
+          "M": 42799,
+          "L": 42802,
+          "XL": 42805,
+          "XXL": 42808,
+          "3XL": 42811
+        }
+      },
+      {
+        "name": "Charcoal",
+        "swatch": "#565459",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38181/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38181/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38181/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38181/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/38181/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 38153,
+          "M": 38167,
+          "L": 38181,
+          "XL": 38195,
+          "XXL": 38209,
+          "3XL": 42109
+        }
+      },
+      {
+        "name": "Ice Grey",
+        "swatch": "#cfcecc",
+        "images": [
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/66243/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/66243/100616/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-1-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/66243/100619/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=person-2-front",
+          "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/66243/127673/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=lifestyle"
+        ],
+        "image": "https://images-api.printify.com/mockup/6a31f46f09dd09cc120fb784/66243/97992/lebron-is-my-dad-but-jalen-brunson-is-my-daddy-knicks-tee.jpg?camera_label=front",
+        "variants": {
+          "S": 66241,
+          "M": 66242,
+          "L": 66243,
+          "XL": 66244,
+          "XXL": 66245,
+          "3XL": 66246
+        }
+      }
+    ]
+  },
   "brunson-roll-call": {
     "name": "Jalen Brunson Is My Dad Tee",
     "priceCents": 3999,
