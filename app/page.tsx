@@ -17,9 +17,10 @@ const HERO_LINES = [
 ];
 
 // Product keys for the dedicated "Knicks in 5" section, in priority order.
+// Genuine "Knicks in 5" shirts stay in the top section. The two Brunson MVP tees
+// are NOT Knicks-in-5 — they lead the grid below as the top non-Knicks-in-5 items
+// (they're first in the catalog order, so they sort to the front of `rest`).
 const KNICKS5 = [
-  "brunson-roll-call",
-  "brunson-daddy",
   "popes-on-our-side",
   "saturday-night-live",
   "knicks-in-five",
